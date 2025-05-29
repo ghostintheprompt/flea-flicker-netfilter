@@ -1,0 +1,78 @@
+{
+  "rules": [
+    {
+      "action": "allow",
+      "process": "ssh",
+      "description": "SSH connections always allowed",
+      "category": "essential"
+    },
+    {
+      "action": "allow", 
+      "port": 53,
+      "description": "DNS resolution",
+      "category": "essential"
+    },
+    {
+      "action": "block",
+      "destination": "telemetry.microsoft.com",
+      "description": "Block Windows telemetry",
+      "category": "privacy"
+    },
+    {
+      "action": "block",
+      "destination": "analytics.google.com", 
+      "description": "Block Google Analytics",
+      "category": "privacy"
+    },
+    {
+      "action": "allow",
+      "process": "burpsuite",
+      "description": "Burp Suite proxy traffic",
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "nmap",
+      "description": "Nmap scanning allowed",
+      "category": "pentest"
+    },
+    {
+      "action": "prompt",
+      "protocol": "TCP",
+      "port": 4444,
+      "description": "Common reverse shell port - prompt for safety",
+      "category": "security"
+    },
+    {
+      "action": "block",
+      "destination": "*.facebook.com",
+      "description": "Block Facebook tracking",
+      "category": "privacy"
+    },
+    {
+      "action": "allow",
+      "process": "curl",
+      "description": "cURL requests allowed",
+      "category": "tools"
+    },
+    {
+      "action": "allow",
+      "process": "wget",
+      "description": "wget downloads allowed", 
+      "category": "tools"
+    },
+    {
+      "action": "prompt",
+      "default": "block",
+      "description": "Default: prompt for unknown connections",
+      "category": "default"
+    }
+  ],
+  "settings": {
+    "log_level": "info",
+    "log_file": "/tmp/netfilter.log",
+    "stealth_mode": false,
+    "auto_save_rules": true,
+    "rule_timeout": 3600
+  }
+}

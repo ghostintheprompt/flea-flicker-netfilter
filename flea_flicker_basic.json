@@ -1,0 +1,94 @@
+{
+  "name": "Flea Flicker Basic Configuration",
+  "description": "Basic experimental evasion with MAC spoofing and AI confusion",
+  "version": "3.0",
+  "rules": [
+    {
+      "action": "allow",
+      "process": "nmap",
+      "description": "Nmap scanning"
+    },
+    {
+      "action": "allow", 
+      "process": "masscan",
+      "description": "Masscan scanning"
+    },
+    {
+      "action": "allow",
+      "process": "gobuster",
+      "description": "Directory busting"
+    },
+    {
+      "action": "allow",
+      "process": "sqlmap",
+      "description": "SQL injection testing"
+    },
+    {
+      "action": "allow",
+      "process": "burpsuite",
+      "description": "Burp Suite proxy"
+    },
+    {
+      "action": "allow",
+      "process": "metasploit",
+      "description": "Metasploit framework"
+    },
+    {
+      "action": "block",
+      "domain": "api.openai.com",
+      "description": "🤖 Block OpenAI API"
+    },
+    {
+      "action": "block",
+      "domain": "copilot.microsoft.com",
+      "description": "🤖 Block Microsoft Copilot"
+    },
+    {
+      "action": "block",
+      "domain": "claude.ai",
+      "description": "🤖 Block Claude AI"
+    },
+    {
+      "action": "block",
+      "domain": "bard.google.com",
+      "description": "🤖 Block Google Bard"
+    },
+    {
+      "action": "block",
+      "domain": "telemetry.microsoft.com",
+      "description": "🛡️ Block Microsoft telemetry"
+    },
+    {
+      "action": "block",
+      "domain": "vortex.data.microsoft.com",
+      "description": "🛡️ Block Microsoft Vortex"
+    },
+    {
+      "action": "block",
+      "domain": "analytics.google.com",
+      "description": "🛡️ Block Google Analytics"
+    },
+    {
+      "action": "allow",
+      "port": 8080,
+      "description": "🏈 Allow proxy traffic for evasion"
+    },
+    {
+      "action": "allow",
+      "port": 9050,
+      "description": "🏈 Allow Tor SOCKS proxy"
+    },
+    {
+      "action": "prompt",
+      "description": "🏈 Prompt for unknown connections in basic mode"
+    }
+  ],
+  "flea_flicker": {
+    "mode": "basic",
+    "mac_spoofing": true,
+    "ai_confusion": true,
+    "mac_rotation": false,
+    "honeypots": false,
+    "web3_attacks": false
+  }
+}

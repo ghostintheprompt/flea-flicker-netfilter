@@ -1,0 +1,137 @@
+{
+  "rules": [
+    {
+      "action": "allow",
+      "port": 22,
+      "description": "SSH access - always allowed",
+      "category": "essential"
+    },
+    {
+      "action": "allow",
+      "port": 53, 
+      "description": "DNS resolution",
+      "category": "essential"
+    },
+    {
+      "action": "allow",
+      "process": "msfconsole",
+      "description": "Metasploit C2 traffic",
+      "category": "redteam"
+    },
+    {
+      "action": "allow",
+      "process": "meterpreter",
+      "description": "Meterpreter sessions",
+      "category": "redteam"
+    },
+    {
+      "action": "allow",
+      "process": "cobalt",
+      "description": "Cobalt Strike",
+      "category": "redteam"
+    },
+    {
+      "action": "allow",
+      "process": "empire",
+      "description": "PowerShell Empire",
+      "category": "redteam"
+    },
+    {
+      "action": "allow",
+      "process": "sliver",
+      "description": "Sliver C2 framework",
+      "category": "redteam"
+    },
+    {
+      "action": "allow",
+      "process": "nmap",
+      "description": "Network reconnaissance",
+      "category": "redteam"
+    },
+    {
+      "action": "allow",
+      "process": "python3",
+      "description": "Custom payloads and scripts",
+      "category": "redteam"
+    },
+    {
+      "action": "allow",
+      "process": "nc",
+      "description": "Netcat reverse shells",
+      "category": "redteam"
+    },
+    {
+      "action": "allow",
+      "process": "socat",
+      "description": "Advanced netcat",
+      "category": "redteam"
+    },
+    {
+      "action": "block",
+      "destination": "telemetry.microsoft.com",
+      "description": "Block Windows telemetry",
+      "category": "opsec"
+    },
+    {
+      "action": "block",
+      "destination": "watson.telemetry.microsoft.com",
+      "description": "Block Watson telemetry",
+      "category": "opsec"
+    },
+    {
+      "action": "block",
+      "destination": "vortex.data.microsoft.com",
+      "description": "Block Microsoft data collection",
+      "category": "opsec"
+    },
+    {
+      "action": "block",
+      "destination": "google-analytics.com",
+      "description": "Block Google Analytics",
+      "category": "opsec"
+    },
+    {
+      "action": "block",
+      "destination": "googletagmanager.com",
+      "description": "Block Google Tag Manager",
+      "category": "opsec"
+    },
+    {
+      "action": "block",
+      "destination": "doubleclick.net",
+      "description": "Block DoubleClick tracking",
+      "category": "opsec"
+    },
+    {
+      "action": "block",
+      "destination": "facebook.com",
+      "description": "Block Facebook tracking",
+      "category": "opsec"
+    },
+    {
+      "action": "block",
+      "destination": "twitter.com",
+      "description": "Block Twitter tracking",
+      "category": "opsec"
+    },
+    {
+      "action": "block",
+      "destination": "linkedin.com",
+      "description": "Block LinkedIn tracking",
+      "category": "opsec"
+    },
+    {
+      "action": "prompt",
+      "default": "block",
+      "description": "Default: block unknown connections for OPSEC",
+      "category": "default"
+    }
+  ],
+  "settings": {
+    "log_level": "warning",
+    "log_file": "/tmp/netfilter_redteam.log", 
+    "stealth_mode": true,
+    "auto_save_rules": false,
+    "rule_timeout": 3600
+  }
+}

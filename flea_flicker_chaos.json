@@ -1,0 +1,165 @@
+{
+  "name": "Flea Flicker Maximum Chaos Configuration",
+  "description": "Maximum experimental evasion with all deception techniques",
+  "version": "3.0",
+  "rules": [
+    {
+      "action": "allow",
+      "process": "nmap",
+      "description": "Nmap scanning"
+    },
+    {
+      "action": "allow", 
+      "process": "masscan",
+      "description": "Masscan scanning"
+    },
+    {
+      "action": "allow",
+      "process": "gobuster",
+      "description": "Directory busting"
+    },
+    {
+      "action": "allow",
+      "process": "sqlmap",
+      "description": "SQL injection testing"
+    },
+    {
+      "action": "allow",
+      "process": "burpsuite",
+      "description": "Burp Suite proxy"
+    },
+    {
+      "action": "allow",
+      "process": "metasploit",
+      "description": "Metasploit framework"
+    },
+    {
+      "action": "allow",
+      "process": "nikto",
+      "description": "Web vulnerability scanner"
+    },
+    {
+      "action": "allow",
+      "process": "wireshark",
+      "description": "Network protocol analyzer"
+    },
+    {
+      "action": "block",
+      "domain": "api.openai.com",
+      "description": "🤖 Block OpenAI API"
+    },
+    {
+      "action": "block",
+      "domain": "copilot.microsoft.com",
+      "description": "🤖 Block Microsoft Copilot"
+    },
+    {
+      "action": "block",
+      "domain": "claude.ai",
+      "description": "🤖 Block Claude AI"
+    },
+    {
+      "action": "block",
+      "domain": "api.anthropic.com",
+      "description": "🤖 Block Anthropic API"
+    },
+    {
+      "action": "block",
+      "domain": "bard.google.com",
+      "description": "🤖 Block Google Bard"
+    },
+    {
+      "action": "block",
+      "domain": "ai.google.dev",
+      "description": "🤖 Block Google AI"
+    },
+    {
+      "action": "block",
+      "domain": "crowdstrike.com",
+      "description": "🛡️ Block CrowdStrike telemetry"
+    },
+    {
+      "action": "block",
+      "domain": "sentinelone.com",
+      "description": "🛡️ Block SentinelOne"
+    },
+    {
+      "action": "block",
+      "domain": "carbonblack.com",
+      "description": "🛡️ Block Carbon Black"
+    },
+    {
+      "action": "block",
+      "domain": "cylance.com",
+      "description": "🛡️ Block Cylance"
+    },
+    {
+      "action": "block",
+      "domain": "virustotal.com",
+      "description": "🛡️ Block VirusTotal"
+    },
+    {
+      "action": "block",
+      "domain": "hybrid-analysis.com",
+      "description": "🛡️ Block Hybrid Analysis"
+    },
+    {
+      "action": "block",
+      "domain": "malware.reverse.it",
+      "description": "🛡️ Block malware analysis"
+    },
+    {
+      "action": "block",
+      "domain": "telemetry.microsoft.com",
+      "description": "🛡️ Block Microsoft telemetry"
+    },
+    {
+      "action": "block",
+      "domain": "vortex.data.microsoft.com",
+      "description": "🛡️ Block Microsoft Vortex"
+    },
+    {
+      "action": "block",
+      "domain": "analytics.google.com",
+      "description": "🛡️ Block Google Analytics"
+    },
+    {
+      "action": "allow",
+      "port": 8080,
+      "description": "🏈 Allow proxy traffic"
+    },
+    {
+      "action": "allow",
+      "port": 9050,
+      "description": "🏈 Allow Tor SOCKS proxy"
+    },
+    {
+      "action": "allow",
+      "port": 3000,
+      "description": "🏈 Allow Web3 development"
+    },
+    {
+      "action": "allow",
+      "port": 8545,
+      "description": "🏈 Allow Ethereum RPC"
+    },
+    {
+      "action": "stealth",
+      "description": "🏈 Default stealth for unknown connections"
+    }
+  ],
+  "flea_flicker": {
+    "mode": "chaos",
+    "mac_spoofing": true,
+    "mac_rotation": true,
+    "mac_noise": true,
+    "ai_confusion": true,
+    "ai_traps": true,
+    "honeypots": true,
+    "web3_attacks": true,
+    "mitm_feints": true,
+    "protocol_confusion": true,
+    "emotional_ai_confusion": true,
+    "chaos_mode": true
+  }
+}

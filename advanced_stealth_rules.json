@@ -1,0 +1,650 @@
+{
+  "metadata": {
+    "name": "Advanced AI Evasion & Stealth Mode",
+    "version": "2.0",
+    "description": "Maximum stealth configuration for advanced AI detection evasion",
+    "use_case": "High-stakes operations requiring complete AI/ML detection avoidance",
+    "warning": "This configuration may break some legitimate applications"
+  },
+  "stealth_settings": {
+    "enable_traffic_mimicry": true,
+    "randomize_user_agents": true,
+    "enable_timing_obfuscation": true,
+    "fake_legitimate_traffic": true,
+    "dns_over_https": true,
+    "tor_routing_preference": true
+  },
+  "rules": [
+    {
+      "action": "allow",
+      "port": 22,
+      "time_restriction": "business_hours_only",
+      "description": "SSH - limited to business hours to appear legitimate",
+      "category": "essential_stealth"
+    },
+    {
+      "action": "allow", 
+      "port": 53,
+      "dns_over_https": true,
+      "description": "DNS over HTTPS - encrypted DNS queries",
+      "category": "essential_stealth"
+    },
+    {
+      "action": "allow",
+      "port": 80,
+      "user_agent_rotation": true,
+      "description": "HTTP with rotating user agents",
+      "category": "essential_stealth"
+    },
+    {
+      "action": "allow",
+      "port": 443,
+      "tls_fingerprint_masking": true,
+      "description": "HTTPS with TLS fingerprint masking",
+      "category": "essential_stealth"
+    },
+    {
+      "action": "block",
+      "destination": "*.telemetry.microsoft.com",
+      "description": "Block Microsoft telemetry endpoints",
+      "category": "ai_telemetry_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.vortex.data.microsoft.com",
+      "description": "Block Microsoft Vortex telemetry",
+      "category": "ai_telemetry_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.watson.data.microsoft.com",
+      "description": "Block Microsoft Watson telemetry", 
+      "category": "ai_telemetry_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.bing.com",
+      "description": "Block Bing AI services",
+      "category": "ai_search_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.copilot.microsoft.com",
+      "description": "Block Microsoft Copilot",
+      "category": "ai_assistant_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.openai.com",
+      "description": "Block OpenAI services",
+      "category": "ai_assistant_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.chatgpt.com",
+      "description": "Block ChatGPT",
+      "category": "ai_assistant_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.api.openai.com",
+      "description": "Block OpenAI API",
+      "category": "ai_assistant_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.googleapis.com",
+      "description": "Block Google API services (includes AI)",
+      "category": "ai_google_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.google-analytics.com",
+      "description": "Block Google Analytics AI",
+      "category": "ai_google_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.googletagmanager.com",
+      "description": "Block Google Tag Manager AI tracking",
+      "category": "ai_google_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.doubleclick.net",
+      "description": "Block Google DoubleClick AI advertising",
+      "category": "ai_google_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.googlesyndication.com",
+      "description": "Block Google Ad Syndication AI",
+      "category": "ai_google_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.youtube.com",
+      "description": "Block YouTube AI recommendations",
+      "category": "ai_google_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.ytimg.com",
+      "description": "Block YouTube AI image analysis",
+      "category": "ai_google_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.facebook.com",
+      "description": "Block Facebook AI analytics",
+      "category": "ai_social_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.meta.com",
+      "description": "Block Meta AI services",
+      "category": "ai_social_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.instagram.com",
+      "description": "Block Instagram AI analytics",
+      "category": "ai_social_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.whatsapp.com",
+      "description": "Block WhatsApp AI analytics",
+      "category": "ai_social_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.twitter.com",
+      "description": "Block Twitter/X AI analytics",
+      "category": "ai_social_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.x.com",
+      "description": "Block X.com AI analytics",
+      "category": "ai_social_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.linkedin.com",
+      "description": "Block LinkedIn AI analytics",
+      "category": "ai_social_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.tiktok.com",
+      "description": "Block TikTok AI analytics",
+      "category": "ai_social_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.amazon.com",
+      "description": "Block Amazon AI services",
+      "category": "ai_commerce_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.amazonaws.com",
+      "description": "Block AWS AI/ML services",
+      "category": "ai_commerce_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.aws.amazon.com",
+      "description": "Block AWS AI services",
+      "category": "ai_commerce_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.anthropic.com",
+      "description": "Block Anthropic Claude AI",
+      "category": "ai_assistant_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.claude.ai",
+      "description": "Block Claude AI interface",
+      "category": "ai_assistant_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.huggingface.co",
+      "description": "Block Hugging Face AI models",
+      "category": "ai_ml_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.replicate.com",
+      "description": "Block Replicate AI services",
+      "category": "ai_ml_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.cohere.ai",
+      "description": "Block Cohere AI services",
+      "category": "ai_ml_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.stability.ai",
+      "description": "Block Stability AI services",
+      "category": "ai_ml_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.midjourney.com",
+      "description": "Block Midjourney AI image generation",
+      "category": "ai_ml_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.runway.ml",
+      "description": "Block Runway ML AI services",
+      "category": "ai_ml_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.character.ai",
+      "description": "Block Character.AI services",
+      "category": "ai_assistant_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.perplexity.ai",
+      "description": "Block Perplexity AI search",
+      "category": "ai_search_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.you.com",
+      "description": "Block You.com AI search",
+      "category": "ai_search_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.crowdstrike.com",
+      "description": "Block CrowdStrike AI threat detection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.sentinelone.com",
+      "description": "Block SentinelOne AI detection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.carbon-black.com",
+      "description": "Block Carbon Black AI analytics",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.cylance.com",
+      "description": "Block Cylance AI antivirus",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.symantec.com",
+      "description": "Block Symantec AI detection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.norton.com",
+      "description": "Block Norton AI security",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.mcafee.com",
+      "description": "Block McAfee AI analytics",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.trendmicro.com",
+      "description": "Block Trend Micro AI detection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.kaspersky.com",
+      "description": "Block Kaspersky AI analytics",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.avast.com",
+      "description": "Block Avast AI detection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.avg.com",
+      "description": "Block AVG AI analytics",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.bitdefender.com",
+      "description": "Block Bitdefender AI detection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.sophos.com",
+      "description": "Block Sophos AI threat detection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.fortinet.com",
+      "description": "Block Fortinet AI security",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.paloaltonetworks.com",
+      "description": "Block Palo Alto AI security",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.checkpoint.com",
+      "description": "Block Check Point AI security",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.darktrace.com",
+      "description": "Block Darktrace AI threat hunting",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.vectra.ai",
+      "description": "Block Vectra AI network detection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.splunk.com",
+      "description": "Block Splunk AI analytics",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.elastic.co",
+      "description": "Block Elastic AI security analytics",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.logrhythm.com",
+      "description": "Block LogRhythm AI SIEM",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.secureworks.com",
+      "description": "Block SecureWorks AI threat detection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.fireeye.com",
+      "description": "Block FireEye AI threat intelligence",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.mandiant.com",
+      "description": "Block Mandiant AI threat hunting",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.proofpoint.com",
+      "description": "Block Proofpoint AI email security",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.mimecast.com",
+      "description": "Block Mimecast AI email analysis",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.cisco.com",
+      "description": "Block Cisco AI network security",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.juniper.net",
+      "description": "Block Juniper AI network detection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.f5.com",
+      "description": "Block F5 AI application security",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.akamai.com",
+      "description": "Block Akamai AI bot detection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.cloudflare.com",
+      "description": "Block Cloudflare AI bot protection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.imperva.com",
+      "description": "Block Imperva AI web security",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.radware.com",
+      "description": "Block Radware AI DDoS protection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.arbor.net",
+      "description": "Block Arbor AI DDoS detection",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.rapid7.com",
+      "description": "Block Rapid7 AI vulnerability management",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.qualys.com",
+      "description": "Block Qualys AI vulnerability scanning",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.tenable.com",
+      "description": "Block Tenable AI vulnerability assessment",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.nessus.org",
+      "description": "Block Nessus AI vulnerability scanning",
+      "category": "ai_security_block"
+    },
+    {
+      "action": "block",
+      "process": "nmap",
+      "description": "Block obvious scanning tools during stealth mode",
+      "category": "tool_stealth"
+    },
+    {
+      "action": "block",
+      "process": "masscan", 
+      "description": "Block obvious scanning tools during stealth mode",
+      "category": "tool_stealth"
+    },
+    {
+      "action": "block",
+      "process": "nikto",
+      "description": "Block obvious web scanning tools during stealth mode",
+      "category": "tool_stealth"
+    },
+    {
+      "action": "block",
+      "process": "sqlmap",
+      "description": "Block obvious SQL injection tools during stealth mode",
+      "category": "tool_stealth"
+    },
+    {
+      "action": "block",
+      "process": "metasploit",
+      "description": "Block obvious exploitation frameworks during stealth mode",
+      "category": "tool_stealth"
+    },
+    {
+      "action": "allow",
+      "process": "curl",
+      "user_agent_override": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      "description": "Allow curl with legitimate user agent",
+      "category": "stealth_allow"
+    },
+    {
+      "action": "allow",
+      "process": "wget",
+      "user_agent_override": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      "description": "Allow wget with legitimate user agent",
+      "category": "stealth_allow"
+    },
+    {
+      "action": "allow",
+      "process": "python",
+      "rate_limit": "5_requests_per_minute",
+      "description": "Allow Python with rate limiting to appear legitimate",
+      "category": "stealth_allow"
+    },
+    {
+      "action": "block",
+      "destination": "*.virustotal.com",
+      "description": "Block VirusTotal AI malware analysis",
+      "category": "ai_analysis_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.hybrid-analysis.com",
+      "description": "Block Hybrid Analysis AI malware detection",
+      "category": "ai_analysis_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.joe-sandbox.com",
+      "description": "Block Joe Sandbox AI analysis",
+      "category": "ai_analysis_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.any.run",
+      "description": "Block ANY.RUN AI malware analysis",
+      "category": "ai_analysis_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.urlvoid.com",
+      "description": "Block URLVoid AI URL analysis",
+      "category": "ai_analysis_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.abuse.ch",
+      "description": "Block abuse.ch AI threat intelligence",
+      "category": "ai_analysis_block"
+    },
+    {
+      "action": "allow",
+      "destination": "*.github.com",
+      "time_restriction": "business_hours_only",
+      "description": "Allow GitHub during business hours only",
+      "category": "stealth_dev"
+    },
+    {
+      "action": "allow",
+      "destination": "*.stackoverflow.com",
+      "rate_limit": "normal_browsing_pattern",
+      "description": "Allow Stack Overflow with normal browsing patterns",
+      "category": "stealth_dev"
+    },
+    {
+      "action": "block",
+      "destination": "*.analytics.google.com",
+      "description": "Block Google Analytics AI tracking",
+      "category": "ai_tracking_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.googleadservices.com",
+      "description": "Block Google Ad Services AI",
+      "category": "ai_tracking_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.googlesyndication.com",
+      "description": "Block Google Syndication AI",
+      "category": "ai_tracking_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.facebook.com/tr",
+      "description": "Block Facebook tracking pixel AI",
+      "category": "ai_tracking_block"
+    },
+    {
+      "action": "block",
+      "destination": "*.connect.facebook.net",
+      "description": "Block Facebook Connect AI tracking",
+      "category": "ai_tracking_block"
+    }
+  ],
+  "traffic_mimicry": {
+    "legitimate_patterns": [
+      {
+        "pattern": "office_worker",
+        "schedule": "9am-5pm weekdays",
+        "sites": ["*.office.com", "*.gmail.com", "*.zoom.us", "*.teams.microsoft.com"],
+        "frequency": "regular_intervals"
+      },
+      {
+        "pattern": "developer",
+        "schedule": "flexible",
+        "sites": ["*.github.com", "*.stackoverflow.com", "*.npmjs.com", "*.pypi.org"],
+        "frequency": "project_based"
+      },
+      {
+        "pattern": "researcher",
+        "schedule": "academic_hours",
+        "sites": ["*.scholar.google.com", "*.arxiv.org", "*.researchgate.net"],
+        "frequency": "burst_then_quiet"
+      }
+    ]
+  }
+}

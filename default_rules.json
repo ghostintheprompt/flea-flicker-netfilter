@@ -1,0 +1,111 @@
+{
+  "rules": [
+    {
+      "action": "allow",
+      "process": "nmap",
+      "description": "Nmap network scanning"
+    },
+    {
+      "action": "allow", 
+      "process": "masscan",
+      "description": "Masscan port scanning"
+    },
+    {
+      "action": "allow",
+      "process": "gobuster", 
+      "description": "Directory/file enumeration"
+    },
+    {
+      "action": "allow",
+      "process": "hydra",
+      "description": "Password brute force attacks"
+    },
+    {
+      "action": "allow",
+      "process": "sqlmap",
+      "description": "SQL injection testing"
+    },
+    {
+      "action": "allow",
+      "process": "burpsuite",
+      "description": "Burp Suite proxy traffic"
+    },
+    {
+      "action": "allow",
+      "process": "msfconsole",
+      "description": "Metasploit framework"
+    },
+    {
+      "action": "allow",
+      "process": "python3",
+      "description": "Python scripts and tools"
+    },
+    {
+      "action": "allow",
+      "process": "curl",
+      "description": "HTTP client requests"
+    },
+    {
+      "action": "allow",
+      "process": "wget",
+      "description": "File downloads"
+    },
+    {
+      "action": "allow",
+      "port": 22,
+      "description": "SSH connections"
+    },
+    {
+      "action": "allow",
+      "port": 53,
+      "description": "DNS resolution"
+    },
+    {
+      "action": "allow",
+      "port": 80,
+      "description": "HTTP traffic"
+    },
+    {
+      "action": "allow",
+      "port": 443,
+      "description": "HTTPS traffic"
+    },
+    {
+      "action": "allow",
+      "port": 4444,
+      "description": "Common reverse shell port"
+    },
+    {
+      "action": "allow",
+      "port": 8080,
+      "description": "Alternative HTTP port"
+    },
+    {
+      "action": "block",
+      "destination": "telemetry.microsoft.com",
+      "description": "Block Microsoft telemetry"
+    },
+    {
+      "action": "block",
+      "destination": "google-analytics.com", 
+      "description": "Block Google Analytics"
+    },
+    {
+      "action": "block",
+      "destination": "facebook.com",
+      "description": "Block Facebook tracking"
+    },
+    {
+      "action": "block",
+      "destination": "doubleclick.net",
+      "description": "Block advertising network"
+    },
+    {
+      "action": "prompt",
+      "default": "allow",
+      "description": "Prompt for unknown connections"
+    }
+  ],
+  "created": "2025-05-28T00:00:00",
+  "description": "Default PentestNetFilter configuration for general use"
+}
