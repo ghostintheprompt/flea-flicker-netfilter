@@ -1,0 +1,149 @@
+{
+  "rules": [
+    {
+      "action": "allow",
+      "process": "ssh",
+      "description": "SSH always allowed",
+      "category": "essential"
+    },
+    {
+      "action": "allow",
+      "port": 53,
+      "description": "DNS resolution",
+      "category": "essential"
+    },
+    {
+      "action": "allow",
+      "port": 80,
+      "description": "HTTP traffic",
+      "category": "essential"
+    },
+    {
+      "action": "allow", 
+      "port": 443,
+      "description": "HTTPS traffic",
+      "category": "essential"
+    },
+    {
+      "action": "allow",
+      "process": "nmap",
+      "description": "Nmap network scanning",
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "masscan", 
+      "description": "Masscan port scanning",
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "gobuster",
+      "description": "Directory/file enumeration", 
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "dirbuster",
+      "description": "Directory enumeration",
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "ffuf",
+      "description": "Fast web fuzzer",
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "hydra",
+      "description": "Password brute force",
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "sqlmap",
+      "description": "SQL injection testing",
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "burpsuite",
+      "description": "Burp Suite proxy",
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "zaproxy",
+      "description": "OWASP ZAP proxy",
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "msfconsole",
+      "description": "Metasploit framework",
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "nikto",
+      "description": "Web vulnerability scanner",
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "wpscan",
+      "description": "WordPress security scanner",
+      "category": "pentest"
+    },
+    {
+      "action": "allow",
+      "process": "python3",
+      "description": "Python scripts",
+      "category": "tools"
+    },
+    {
+      "action": "allow",
+      "process": "python",
+      "description": "Python scripts",
+      "category": "tools"
+    },
+    {
+      "action": "allow",
+      "process": "curl",
+      "description": "cURL requests",
+      "category": "tools"
+    },
+    {
+      "action": "allow",
+      "process": "wget",
+      "description": "wget downloads",
+      "category": "tools"
+    },
+    {
+      "action": "block",
+      "destination": "telemetry.ubuntu.com",
+      "description": "Block Ubuntu telemetry",
+      "category": "privacy"
+    },
+    {
+      "action": "block",
+      "destination": "canonical.com",
+      "description": "Block Canonical tracking",
+      "category": "privacy"
+    },
+    {
+      "action": "prompt",
+      "default": "allow",
+      "description": "Default: prompt for unknown connections",
+      "category": "default"
+    }
+  ],
+  "settings": {
+    "log_level": "info",
+    "log_file": "/tmp/netfilter_kali.log",
+    "stealth_mode": false,
+    "auto_save_rules": true,
+    "rule_timeout": 7200
+  }
+}

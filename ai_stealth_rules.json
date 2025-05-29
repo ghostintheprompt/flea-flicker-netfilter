@@ -1,0 +1,339 @@
+{
+  "rules": [
+    {
+      "action": "allow",
+      "port": 22,
+      "description": "SSH - essential for operations",
+      "category": "essential"
+    },
+    {
+      "action": "allow",
+      "port": 53,
+      "description": "DNS - required for basic functionality", 
+      "category": "essential"
+    },
+    {
+      "action": "allow",
+      "port": 80,
+      "description": "HTTP - blend with normal traffic",
+      "category": "essential"
+    },
+    {
+      "action": "allow",
+      "port": 443,
+      "description": "HTTPS - encrypted traffic appears normal",
+      "category": "essential"
+    },
+    {
+      "action": "block",
+      "destination": "*.microsoft.com",
+      "description": "Block Microsoft telemetry and AI analytics",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.windows.com",
+      "description": "Block Windows AI telemetry",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.office.com",
+      "description": "Block Office 365 AI analytics",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.azure.com",
+      "description": "Block Azure AI services",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.openai.com",
+      "description": "Block OpenAI data collection",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "api.openai.com",
+      "description": "Block OpenAI API telemetry",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.googleapis.com",
+      "description": "Block Google AI services",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.google-analytics.com",
+      "description": "Block Google Analytics AI",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.googletagmanager.com",
+      "description": "Block Google Tag Manager AI tracking",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.facebook.com",
+      "description": "Block Meta AI analytics",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.instagram.com",
+      "description": "Block Instagram AI tracking",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.whatsapp.com",
+      "description": "Block WhatsApp AI analytics",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.amazon.com",
+      "description": "Block Amazon AI services (Alexa, etc.)",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.amazonaws.com",
+      "description": "Block AWS AI/ML services",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.anthropic.com",
+      "description": "Block Anthropic AI services",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.crowdstrike.com",
+      "description": "Block CrowdStrike AI detection",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.sentinelone.com",
+      "description": "Block SentinelOne AI detection",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.carbon-black.com",
+      "description": "Block Carbon Black AI analytics",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.symantec.com",
+      "description": "Block Symantec AI detection",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.mcafee.com",
+      "description": "Block McAfee AI analytics",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.trendmicro.com",
+      "description": "Block Trend Micro AI detection",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.kaspersky.com",
+      "description": "Block Kaspersky AI analytics",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.avast.com",
+      "description": "Block Avast AI detection",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.malwarebytes.com",
+      "description": "Block Malwarebytes AI analytics",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.elastic.co",
+      "description": "Block Elastic SIEM AI detection",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.splunk.com",
+      "description": "Block Splunk AI analytics",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.paloaltonetworks.com",
+      "description": "Block Palo Alto AI detection",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.fortinet.com",
+      "description": "Block Fortinet AI analytics",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.checkpoint.com",
+      "description": "Block Check Point AI detection",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.proofpoint.com",
+      "description": "Block Proofpoint AI analytics",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.darktrace.com",
+      "description": "Block Darktrace AI detection",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.vectra.ai",
+      "description": "Block Vectra AI detection",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "block",
+      "destination": "*.cylance.com",
+      "description": "Block Cylance AI detection",
+      "category": "ai_evasion"
+    },
+    {
+      "action": "allow",
+      "process": "curl",
+      "description": "cURL - appears as normal web requests",
+      "category": "stealth_tools"
+    },
+    {
+      "action": "allow", 
+      "process": "wget",
+      "description": "wget - normal download behavior",
+      "category": "stealth_tools"
+    },
+    {
+      "action": "allow",
+      "process": "ssh",
+      "description": "SSH - legitimate admin traffic",
+      "category": "stealth_tools"
+    },
+    {
+      "action": "allow",
+      "process": "scp",
+      "description": "SCP - normal file transfer",
+      "category": "stealth_tools"
+    },
+    {
+      "action": "allow",
+      "process": "rsync",
+      "description": "rsync - normal sync operations",
+      "category": "stealth_tools"
+    },
+    {
+      "action": "block",
+      "process": "nmap",
+      "description": "Block obvious scanning tools in AI stealth mode",
+      "category": "signature_evasion"
+    },
+    {
+      "action": "block",
+      "process": "masscan",
+      "description": "Block aggressive scanners",
+      "category": "signature_evasion"
+    },
+    {
+      "action": "block",
+      "process": "gobuster",
+      "description": "Block directory bruteforcers",
+      "category": "signature_evasion"
+    },
+    {
+      "action": "block",
+      "process": "hydra",
+      "description": "Block password bruteforcers",
+      "category": "signature_evasion"
+    },
+    {
+      "action": "block",
+      "process": "sqlmap",
+      "description": "Block SQL injection tools",
+      "category": "signature_evasion"
+    },
+    {
+      "action": "block",
+      "process": "metasploit",
+      "description": "Block Metasploit signatures",
+      "category": "signature_evasion"
+    },
+    {
+      "action": "block",
+      "process": "msfconsole",
+      "description": "Block Metasploit console",
+      "category": "signature_evasion"
+    },
+    {
+      "action": "block",
+      "process": "nikto",
+      "description": "Block web vulnerability scanners",
+      "category": "signature_evasion"
+    },
+    {
+      "action": "allow",
+      "process": "python3",
+      "description": "Python scripts - appears as normal development",
+      "category": "stealth_tools"
+    },
+    {
+      "action": "allow",
+      "process": "node",
+      "description": "Node.js - normal development traffic",
+      "category": "stealth_tools"
+    },
+    {
+      "action": "allow",
+      "process": "java",
+      "description": "Java applications - business traffic",
+      "category": "stealth_tools"
+    },
+    {
+      "action": "prompt",
+      "default": "block",
+      "description": "Default: block everything unknown for maximum stealth",
+      "category": "default"
+    }
+  ],
+  "settings": {
+    "log_level": "error",
+    "log_file": "/tmp/.system_cache",
+    "stealth_mode": true,
+    "auto_save_rules": false,
+    "rule_timeout": 7200,
+    "ai_evasion_mode": true,
+    "signature_randomization": true,
+    "traffic_mimicry": true,
+    "timing_randomization": true
+  }
+}
