@@ -5,8 +5,8 @@
 
 set -e
 
-echo "🔥 PentestNetFilter Installation Script"
-echo "======================================="
+echo "Flea Flicker NetFilter Installation Script"
+echo "==========================================="
 
 # Check if running as root
 if [[ $EUID -eq 0 ]]; then
@@ -115,16 +115,16 @@ cat > example_rules.json << 'EOF'
     }
   ],
   "created": "2025-05-28T00:00:00",
-  "description": "Example PentestNetFilter configuration"
+  "description": "Example Flea Flicker NetFilter configuration"
 }
 EOF
 
 # Create a simple start script
 cat > start_filter.sh << 'EOF'
 #!/bin/bash
-# Quick start script for PentestNetFilter
+# Quick start script for Flea Flicker NetFilter
 
-echo "🔥 Starting PentestNetFilter..."
+echo "Starting Flea Flicker NetFilter..."
 echo ""
 echo "Choose mode:"
 echo "1. Interactive mode (prompt for unknown connections)"
@@ -215,13 +215,13 @@ cat > ctf_rules.json << 'EOF'
     }
   ],
   "created": "2025-05-28T00:00:00",
-  "description": "CTF-optimized PentestNetFilter configuration"
+  "description": "CTF-optimized Flea Flicker NetFilter configuration"
 }
 EOF
 
 echo ""
-echo "🎉 Installation Complete!"
-echo "========================"
+echo "Installation Complete!"
+echo "======================"
 echo ""
 echo "Quick Start:"
 echo "  ./start_filter.sh                    # Interactive start menu"
@@ -238,4 +238,4 @@ echo "  ctf_rules.json      # CTF-optimized rules"
 echo ""
 echo "Note: The filter no longer requires sudo thanks to least-privilege deployment (setcap)"
 echo ""
-echo "Happy hacking! 🔥"
+echo "Happy hacking."

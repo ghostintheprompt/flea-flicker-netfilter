@@ -509,7 +509,7 @@ class PentestNetFilter:
         if not self.flea_flicker:
             return
             
-        print(f"🏈 Initializing Flea Flicker {mode.upper()} mode...")
+        print(f"[*] Initializing Flea Flicker {mode.upper()} mode...")
         
         if mode == "basic":
             # Basic MAC spoofing + AI confusion
@@ -565,7 +565,7 @@ def main():
     parser.add_argument('--ai-evasion', action='store_true', 
                        help='Enable detection evasion (implies stealth)')
     parser.add_argument('--flea-flicker', choices=['basic', 'advanced', 'maximum', 'chaos'],
-                       help='🏈 Enable experimental Flea Flicker evasion mode')
+                       help='Enable experimental Flea Flicker evasion mode')
     parser.add_argument('--interactive', action='store_true', help='Interactive mode (prompt for unknown connections)')
     parser.add_argument('--save-config', help='Save current rules to config file and exit')
     parser.add_argument('--demo', action='store_true', help='Run in demo mode (safe for testing)')
@@ -580,7 +580,7 @@ def main():
     
     # Flea Flicker mode warnings
     if args.flea_flicker:
-        print("🏈 [!] EXPERIMENTAL FLEA FLICKER MODE ACTIVATED")
+        print("[!] EXPERIMENTAL FLEA FLICKER MODE ACTIVATED")
         print("   Using advanced evasion techniques for authorized testing only")
     
     # Check if running as root (skip for demo mode)
@@ -629,7 +629,7 @@ def main():
             print("[*] Blocking analysis services and security vendors")
             
         if args.flea_flicker:
-            print(f"🏈 Flea Flicker {args.flea_flicker.upper()} Mode Active")
+            print(f"[*] Flea Flicker {args.flea_flicker.upper()} Mode Active")
             print("[*] Experimental deception and misdirection protocols engaged")
         
         netfilter.start_monitoring()

@@ -236,10 +236,10 @@ If open-source tools evade your IDS, real attackers already are.
 
 ## Documentation
 
-- **STEALTH_GUIDE.md** - Advanced stealth features
-- **QUICKSTART.md** - Installation and setup
+- **STEALTH_GUIDE.md** - Advanced stealth features and mode reference
+- **FLEA_FLICKER_GUIDE.md** - Experimental evasion modes
+- **EVASION_METHODOLOGY.md** - Technical breakdown of IDS bypass techniques
 - **VM_DEPLOYMENT.md** - VMware workflow
-- **FLEA_FLICKER_GUIDE.md** - Experimental features
 
 ---
 

@@ -309,7 +309,7 @@ class FleaFlickerEvasion:
     
     def flea_flicker_combo(self, interface='eth0'):
         """Execute Flea Flicker - multiple evasion techniques"""
-        print("🏈 FLEA FLICKER ACTIVATED")
+        print("[*] FLEA FLICKER ACTIVATED")
         print("=" * 50)
         
         # 1. Instant MAC change
@@ -338,7 +338,7 @@ class FleaFlickerEvasion:
         self.web3_attack_simulation()
         self.setup_mitm_feints()
         
-        print("🏈 FLEA FLICKER COMPLETE - Misdirection protocols active")
+        print("[+] FLEA FLICKER COMPLETE - Misdirection protocols active")
     
     def stop_all_evasion(self):
         """Stop all evasion techniques"""
@@ -412,7 +412,7 @@ class FleaFlickerEvasion:
 
 # Quick test/demo
 if __name__ == "__main__":
-    print("🏈 Flea Flicker NetFilter - Experimental Evasion Module")
+    print("Flea Flicker NetFilter - Experimental Evasion Module")
     print("=" * 60)
     
     evasion = FleaFlickerEvasion()

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PentestNetFilter Demo & Test Script
+Flea Flicker NetFilter Demo & Test Script
 Quick demonstration of core functionality without requiring root privileges
 """
 
@@ -20,7 +20,7 @@ def load_rules(config_file="default_rules.json"):
 
 def demo_rule_matching():
     """Demonstrate rule matching logic"""
-    print("🔥 PentestNetFilter Demo")
+    print("Flea Flicker NetFilter Demo")
     print("=" * 50)
     
     rules = load_rules()
@@ -96,7 +96,7 @@ def rule_matches(rule, packet_info):
 def show_usage():
     """Show usage examples"""
     print("\n" + "=" * 50)
-    print("📚 Usage Examples:")
+    print("Usage Examples:")
     print("=" * 50)
     
     examples = [
@@ -110,7 +110,7 @@ def show_usage():
     for desc, cmd in examples:
         print(f"{desc:20}: {cmd}")
     
-    print("\n💡 Pro Tips:")
+    print("\nPro Tips:")
     print("- Run without sudo first to check dependencies")
     print("- Use --stealth for red team operations")
     print("- Create custom rule files for specific engagements")
@@ -121,6 +121,6 @@ if __name__ == "__main__":
         demo_rule_matching()
         show_usage()
     else:
-        print("🔥 PentestNetFilter Demo Script")
+        print("Flea Flicker NetFilter Demo Script")
         print("Run with --demo to see rule matching demonstration")
         print("Or use netfilter.py for the actual network filter")

@@ -1,5 +1,5 @@
 #!/bin/bash
-# PentestNetFilter Launcher - Advanced Stealth Operations
+# Flea Flicker NetFilter Launcher - Advanced Stealth Operations
 # Easy-to-use launcher for different operation modes
 
 set -e
@@ -226,7 +226,7 @@ main() {
             exit 0
             ;;
         "install")
-            echo -e "${GREEN}[*] Installing PentestNetFilter...${NC}"
+            echo -e "${GREEN}[*] Installing Flea Flicker NetFilter...${NC}"
             chmod +x install.sh
             ./install.sh
             exit 0

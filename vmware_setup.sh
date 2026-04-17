@@ -3,8 +3,8 @@
 # PentestNetFilter VMware Setup Script
 # Run this once in your Kali Linux VM after setting up the shared folder
 
-echo "🔥 PentestNetFilter VMware Shared Folder Setup"
-echo "=============================================="
+echo "Flea Flicker NetFilter VMware Shared Folder Setup"
+echo "=================================================="
 
 # Check if we're in a VMware environment
 if [ ! -d "/mnt/hgfs" ]; then
@@ -21,7 +21,7 @@ if [ -d "/mnt/hgfs/pentest_netfilter" ]; then
 elif [ -d "/mnt/shared/pentest_netfilter" ]; then
     SHARED_FOLDER="/mnt/shared/pentest_netfilter"
 else
-    echo "[!] PentestNetFilter shared folder not found"
+    echo "[!] Flea Flicker NetFilter shared folder not found"
     echo "    Expected: /mnt/hgfs/pentest_netfilter or /mnt/shared/pentest_netfilter"
     echo "    Check your VMware shared folder configuration"
     exit 1
@@ -57,7 +57,7 @@ fi
 BASHRC="$HOME/.bashrc"
 if ! grep -q "netfilter aliases" "$BASHRC"; then
     echo "" >> "$BASHRC"
-    echo "# PentestNetFilter aliases" >> "$BASHRC"
+    echo "# Flea Flicker NetFilter aliases" >> "$BASHRC"
     echo "alias netfilter='cd $SHARED_FOLDER'" >> "$BASHRC"
     echo "alias nf='sudo python3 $SHARED_FOLDER/netfilter.py'" >> "$BASHRC"
     echo "alias nf-demo='python3 $SHARED_FOLDER/demo.py --demo'" >> "$BASHRC"
@@ -71,7 +71,7 @@ mkdir -p "$HOME/bin"
 # Interactive mode script
 cat > "$HOME/bin/start-netfilter" << 'EOF'
 #!/bin/bash
-echo "🔥 Starting PentestNetFilter (Interactive Mode)..."
+echo "Starting Flea Flicker NetFilter (Interactive Mode)..."
 cd /opt/netfilter
 sudo python3 netfilter.py --interactive
 EOF
@@ -79,7 +79,7 @@ EOF
 # Stealth mode script
 cat > "$HOME/bin/stealth-netfilter" << 'EOF'
 #!/bin/bash
-echo "👻 Starting PentestNetFilter (Stealth Mode)..."
+echo "Starting Flea Flicker NetFilter (Stealth Mode)..."
 cd /opt/netfilter
 sudo python3 netfilter.py --stealth &
 NETFILTER_PID=$!
@@ -91,7 +91,7 @@ EOF
 # Kali-optimized mode script
 cat > "$HOME/bin/kali-netfilter" << 'EOF'
 #!/bin/bash
-echo "🗡️ Starting PentestNetFilter (Kali Optimized)..."
+echo "Starting Flea Flicker NetFilter (Kali Optimized)..."
 cd /opt/netfilter
 sudo python3 netfilter.py --config kali_rules.json --interactive
 EOF
@@ -100,23 +100,23 @@ EOF
 chmod +x "$HOME/bin/"*netfilter
 
 echo ""
-echo "✅ Setup Complete!"
+echo "Setup Complete!"
 echo ""
-echo "🚀 Quick Start Commands:"
+echo "Quick Start Commands:"
 echo "  start-netfilter     - Interactive mode"
 echo "  stealth-netfilter   - Background stealth mode"
 echo "  kali-netfilter      - Kali-optimized rules"
 echo "  netfilter          - Navigate to folder"
 echo "  nf --help          - Show all options"
 echo ""
-echo "📂 Project Location:"
+echo "Project Location:"
 echo "  Shared folder: $SHARED_FOLDER"
 echo "  Symlink: /opt/netfilter"
 echo ""
-echo "🔄 To apply aliases in current session:"
+echo "To apply aliases in current session:"
 echo "  source ~/.bashrc"
 echo ""
-echo "💡 Next steps:"
+echo "Next steps:"
 echo "  1. source ~/.bashrc"
 echo "  2. start-netfilter"
 echo "  3. Run your pentest tools in another terminal"
