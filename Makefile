@@ -12,14 +12,19 @@ help:
 	@echo "make deps       - Install Python dependencies only"
 	@echo "make status     - Show current system status"
 	@echo "make clean      - Clean up iptables rules"
+	@echo "make setcap     - Grant necessary capabilities to Python binary"
 	@echo ""
-	@echo "🚨 Main Usage (requires sudo):"
-	@echo "sudo python3 netfilter.py --interactive"
+	@echo "🚨 Main Usage:"
+	@echo "python3 netfilter.py --interactive"
 
 install:
 	@echo "🔧 Installing PentestNetFilter..."
 	chmod +x install.sh netfilter.py demo.py
 	./install.sh
+
+setcap:
+	@echo "🔒 Setting capabilities for least-privilege..."
+	sudo setcap cap_net_admin,cap_net_raw+eip $$(readlink -f $$(which python3))
 
 demo:
 	@echo "🎯 Running rule matching demo..."
@@ -47,13 +52,13 @@ clean:
 
 # Quick start targets
 interactive: deps
-	@echo "🔥 Starting interactive mode (requires sudo)..."
-	sudo python3 netfilter.py --interactive
+	@echo "🔥 Starting interactive mode..."
+	python3 netfilter.py --interactive
 
 stealth: deps
-	@echo "👻 Starting stealth mode (requires sudo)..."
-	sudo python3 netfilter.py --stealth
+	@echo "👻 Starting stealth mode..."
+	python3 netfilter.py --stealth
 
 config: deps
-	@echo "⚙️ Starting with custom config (requires sudo)..."
-	sudo python3 netfilter.py --config default_rules.json
+	@echo "⚙️ Starting with custom config..."
+	python3 netfilter.py --config default_rules.json

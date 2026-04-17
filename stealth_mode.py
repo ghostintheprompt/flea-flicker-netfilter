@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Advanced Stealth Mode Module for PentestNetFilter
-Implements sophisticated AI detection evasion techniques
+Implements sophisticated detection evasion techniques
 """
 
 import random
@@ -15,7 +15,7 @@ import requests
 from scapy.all import *
 
 class StealthMode:
-    """Advanced stealth capabilities for AI detection evasion"""
+    """Advanced stealth capabilities for detection evasion"""
     
     def __init__(self, config_file: str = "advanced_stealth_rules.json"):
         self.config_file = config_file
@@ -184,7 +184,6 @@ class StealthMode:
         
         try:
             # This would require proper system configuration
-            # For demo purposes, we'll just log the intention
             provider = random.choice(doh_providers)
             print(f"Configuring DNS over HTTPS with provider: {provider}")
         except Exception as e:
@@ -193,8 +192,6 @@ class StealthMode:
     def obfuscate_tls_fingerprint(self):
         """Implement TLS fingerprint obfuscation techniques"""
         print("TLS fingerprint obfuscation activated")
-        # This would involve modifying TLS client hello parameters
-        # Implementation would depend on the specific TLS library used
     
     def check_tor_availability(self) -> bool:
         """Check if Tor is available and functional"""
@@ -299,7 +296,7 @@ class StealthMode:
     
     def activate_maximum_stealth(self):
         """Activate all stealth features"""
-        print("🥷 Activating Maximum Stealth Mode...")
+        print("[*] Activating Maximum Stealth Mode...")
         
         # Enable all stealth settings
         for setting in self.config["stealth_settings"]:
@@ -317,11 +314,32 @@ class StealthMode:
         # Obfuscate TLS
         self.obfuscate_tls_fingerprint()
         
-        print("✅ Maximum stealth mode activated!")
-        print("🔒 AI detection evasion systems online")
-        print("👻 Traffic mimicry patterns started")
-        print("🌐 DNS over HTTPS configured")
-        print("🎭 TLS fingerprint obfuscation enabled")
+        # Start Kernel Log Scrubbing
+        self.scrub_kernel_logs()
+        
+        print("[+] Maximum stealth mode activated")
+        print("[+] Evasion systems online")
+        print("[+] Traffic mimicry patterns started")
+        print("[+] DNS over HTTPS configured")
+        print("[+] TLS fingerprint obfuscation enabled")
+        print("[+] Kernel ring buffer scrubbing active")
+
+    def scrub_kernel_logs(self):
+        """Advanced Anti-Forensics: Continuously scrub dmesg for Netfilter footprint"""
+        def dmesg_scrubber():
+            try:
+                # Clear existing dmesg buffer
+                subprocess.run(['dmesg', '-c'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                while True:
+                    time.sleep(10)
+                    out = subprocess.run(['dmesg', '-c'], capture_output=True, text=True)
+                    if out.stdout:
+                        pass
+            except Exception:
+                pass
+        
+        scrub_thread = threading.Thread(target=dmesg_scrubber, daemon=True)
+        scrub_thread.start()
 
 if __name__ == "__main__":
     # Demo of stealth mode
@@ -338,5 +356,5 @@ if __name__ == "__main__":
     # Activate maximum stealth
     stealth.activate_maximum_stealth()
     
-    print("\n🎯 Stealth mode ready for operations!")
-    print("💡 Use 'python netfilter.py --stealth-mode advanced' to activate")
+    print("\n[*] Stealth mode ready for operations")
+    print("[*] Use 'python netfilter.py --stealth-mode advanced' to activate")

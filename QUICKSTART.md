@@ -1,162 +1,124 @@
 # PentestNetFilter Quick Start Guide
 
-## 🚀 Installation
+## Installation
 
+### Method 1: Automated Installation (Recommended)
 ```bash
-# 1. Clone or download the project
 cd pentest_netfilter
-
-# 2. Install dependencies (Method 1: Auto installer)
 chmod +x install.sh
 ./install.sh
+```
 
-# OR Method 2: Manual installation
+### Method 2: Manual Installation
+```bash
 pip3 install --user psutil scapy
 ```
 
-## 🔥 Basic Usage
+## Basic Usage
 
-### Interactive Mode (Recommended for learning)
+### Interactive Mode
+Recommended for initial tool analysis and learning.
 ```bash
 sudo python3 netfilter.py --interactive
 ```
-- Prompts you for each unknown connection
-- Great for understanding network behavior
-- Shows process names and destinations
+- Real-time prompts for unknown connections.
+- Identifies process names and destinations.
+- Useful for mapping tool behavior.
 
-### Stealth Mode (For red team operations)
+### Stealth Mode
+Designed for red team operations and covert assessments.
 ```bash
 sudo python3 netfilter.py --stealth
 ```
-- Minimal output, blocks silently
-- Uses default rules without prompting
-- Perfect for covert operations
+- Minimal terminal output.
+- Silent blocking based on predefined rules.
+- Reduces operational footprint.
 
-### Config-Based Mode
+### Configuration-Based Mode
 ```bash
 sudo python3 netfilter.py --config example_rules.json
 ```
-- Uses predefined rules
-- No interactive prompts
-- Automated filtering
+- Uses predefined JSON rule sets.
+- No interactive prompts.
+- Ideal for automated environments.
 
-## 📋 Quick Examples
+## Common Scenarios
 
-### 1. Learning Mode - See what your tools do
+### 1. Tool Behavior Analysis
+Monitor exactly what network connections your tools are initiating.
 ```bash
 # Start the filter
 sudo python3 netfilter.py --interactive
 
-# In another terminal, run tools
+# Execute tools in another terminal
 nmap -sS target.com
 gobuster dir -u http://target.com
-burpsuite
 ```
 
-### 2. Privacy Mode - Block telemetry
+### 2. Telemetry Blocking
+Block outbound telemetry and background noise during sensitive engagements.
 ```bash
-# Use privacy-focused rules
 sudo python3 netfilter.py --config privacy_rules.json
 ```
 
-### 3. CTF Mode - Selective filtering
+### 3. CTF & Specialized Filtering
+Apply focused rule sets for specific competition environments.
 ```bash
-# Create custom rules for CTF challenge
 sudo python3 netfilter.py --config ctf_rules.json
 ```
 
-## 🛠 Customization
+## Configuration
 
-### Create Custom Rules
-Edit `default_rules.json` or create new config:
+### Rule Definition
+Custom rules can be defined in JSON format:
 
 ```json
 {
   "rules": [
     {
       "action": "allow",
-      "process": "your_tool",
-      "description": "Allow specific tool"
+      "process": "custom_tool",
+      "description": "Permit specific binary"
     },
     {
       "action": "block", 
-      "destination": "bad.domain.com",
+      "destination": "telemetry.service.com",
       "description": "Block specific domain"
     }
   ]
 }
 ```
 
-### Rule Types
-- **process**: Filter by process name
-- **port**: Filter by port number  
-- **destination**: Filter by IP/domain
-- **protocol**: Filter by TCP/UDP
+### Supported Selectors
+- **process**: Filter by binary name.
+- **port**: Filter by destination port.
+- **destination**: Filter by IP address or domain.
+- **protocol**: Filter by TCP or UDP.
 
 ### Actions
-- **allow**: Always permit
-- **block**: Always deny
-- **prompt**: Ask user interactively
+- **allow**: Permit the connection.
+- **block**: Deny the connection via iptables.
+- **prompt**: Request manual intervention.
 
-## 🎯 Use Case Examples
+## Operational Security (OPSEC)
 
-### Red Team Assessment
+- **Verification**: Always validate rule sets in a laboratory environment before deployment.
+- **Persistence**: Ensure SSH (port 22) remains permitted to prevent lockout on remote systems.
+- **Cleanup**: Use `make clean` to flush active iptables rules after operations.
+
+## Troubleshooting
+
+### Permission Issues
+Packet capture and firewall manipulation require elevated privileges.
 ```bash
-# Block outbound telemetry while allowing tools
-sudo python3 netfilter.py --stealth --config redteam_rules.json
-```
-
-### Malware Analysis
-```bash
-# Control malware network access
-sudo python3 netfilter.py --interactive --interface eth0
-```
-
-### CTF Competition
-```bash
-# Quick rule creation during challenges
-sudo python3 netfilter.py --interactive
-# Use 'R' to remember allowed connections
-# Use 'S' to save blocked connections
-```
-
-## 🚨 Safety Notes
-
-- Always test in VM first
-- Keep SSH (port 22) allowed
-- Don't run on production systems
-- Use `make clean` to remove iptables rules
-
-## 📊 Monitoring
-
-Check logs and stats:
-```bash
-# View current stats
-tail -f /tmp/netfilter.log
-
-# Clean up rules
-make clean
-```
-
-## 🔧 Troubleshooting
-
-### Dependencies missing:
-```bash
-pip3 install --user psutil scapy
-```
-
-### Permission denied:
-```bash
-# Must run as root for packet capture
 sudo python3 netfilter.py
 ```
 
-### Can't reach internet:
+### Connectivity Loss
+If the system loses connectivity due to misconfiguration, flush the rules:
 ```bash
-# Clear iptables rules
 sudo iptables -F OUTPUT
 ```
 
 ---
-
-**Remember**: This tool is for educational and authorized testing only! 🔥
+**Disclaimer**: This tool is intended for authorized security assessments and educational purposes only.

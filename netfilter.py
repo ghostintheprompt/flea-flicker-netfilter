@@ -15,6 +15,8 @@ import signal
 import argparse
 import threading
 import subprocess
+import random
+import syslog
 from datetime import datetime
 from collections import defaultdict
 
@@ -60,7 +62,7 @@ class PentestNetFilter:
         self.stealth_mode = None
         if STEALTH_AVAILABLE and (stealth or stealth_level != "basic"):
             self.stealth_mode = StealthMode(stealth_level)
-            print(f"🥷 Stealth mode initialized: {stealth_level}")
+            print(f"[*] Stealth mode initialized: {stealth_level}")
             
         # Initialize Flea Flicker evasion if available and requested
         self.flea_flicker = None
@@ -255,6 +257,53 @@ class PentestNetFilter:
                 
         return True
         
+    def log_event(self, action, packet_info, rule=None):
+        """SIEM Integration: Log events in CEF format to Syslog"""
+        rule_desc = rule.get('description', 'No description') if rule else 'No description'
+        cef_log = (f"CEF:0|PentestNetFilter|NetFilter|3.0|{action.upper()}|Network Connection {action.title()}|5|"
+                   f"src={packet_info.get('src_ip', '')} spt={packet_info.get('src_port', '')} "
+                   f"dst={packet_info.get('dst_ip', '')} dpt={packet_info.get('dst_port', '')} "
+                   f"proto={packet_info.get('protocol', '')} msg={rule_desc}")
+        try:
+            syslog.openlog(ident="flea_flicker", logoption=syslog.LOG_PID, facility=syslog.LOG_AUTH)
+            syslog.syslog(syslog.LOG_INFO, cef_log)
+        except Exception:
+            pass
+        return cef_log
+
+    def modify_packet_for_evasion(self, packet):
+        """Layer 7 Protocol Awareness: DPI Obfuscation & JA3 Fingerprint Evasion"""
+        modified = False
+        
+        # JA3 Fingerprint Evasion (TCP SYN)
+        if packet.haslayer(TCP) and packet[TCP].flags == 'S':
+            packet[TCP].window = random.choice([8192, 16384, 29200, 32768, 65535])
+            packet[TCP].seq = (packet[TCP].seq + random.randint(1, 100)) & 0xffffffff
+            modified = True
+            
+        # DPI Obfuscation (HTTP/DNS)
+        if packet.haslayer(scapy.Raw):
+            raw_data = packet[scapy.Raw].load
+            try:
+                if b"HTTP/" in raw_data and b"User-Agent:" in raw_data:
+                    import re
+                    stealth_ua = b"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36\r\n"
+                    obfuscated_data = re.sub(b"User-Agent:.*?\r\n", stealth_ua, raw_data, flags=re.IGNORECASE)
+                    packet[scapy.Raw].load = obfuscated_data
+                    modified = True
+            except Exception:
+                pass
+
+        if modified:
+            if packet.haslayer(IP):
+                del packet[IP].len
+                del packet[IP].chksum
+            if packet.haslayer(TCP):
+                del packet[TCP].chksum
+            elif packet.haslayer(UDP):
+                del packet[UDP].chksum
+        return packet
+
     def handle_packet(self, packet):
         """Process intercepted packet with stealth enhancements"""
         if not packet.haslayer(IP):
@@ -274,6 +323,10 @@ class PentestNetFilter:
         # Skip local traffic
         if packet_info['dst_ip'].startswith('127.') or packet_info['dst_ip'].startswith('192.168.'):
             return
+            
+        # Optional: modify packet dynamically before logic applies
+        if self.flea_flicker_mode:
+            packet = self.modify_packet_for_evasion(packet)
         
         # Apply stealth mode timing obfuscation
         if self.stealth_mode:
@@ -289,33 +342,37 @@ class PentestNetFilter:
             
             if action == 'allow':
                 self.allowed_count += 1
+                self.log_event('allow', packet_info, rule)
                 
                 # Apply stealth modifications for allowed traffic
                 if self.stealth_mode:
                     # Check time restrictions
                     if not self.stealth_mode.should_allow_by_time(rule):
                         if not self.stealth:
-                            print(f"[⏰] TIME_BLOCK: {packet_info['dst_ip']}:{packet_info['dst_port']} - Outside allowed time window")
+                            print(f"[TIME_BLOCK] {packet_info['dst_ip']}:{packet_info['dst_port']} - Outside allowed time window")
                         self.block_connection(packet_info)
+                        self.log_event('block', packet_info, rule)
                         return
                     
                     # Apply rate limiting
                     process_name = self.get_process_name(packet_info['src_port'])
                     if not self.stealth_mode.apply_rate_limiting(process_name, rule):
                         if not self.stealth:
-                            print(f"[🚦] RATE_LIMIT: {packet_info['dst_ip']}:{packet_info['dst_port']} - Rate limit exceeded")
+                            print(f"[RATE_LIMIT] {packet_info['dst_ip']}:{packet_info['dst_port']} - Rate limit exceeded")
                         self.block_connection(packet_info)
+                        self.log_event('block', packet_info, rule)
                         return
                 
                 if not self.stealth:
-                    print(f"[✓] ALLOW: {packet_info['dst_ip']}:{packet_info['dst_port']} - {rule.get('description', 'No description')}")
+                    print(f"[ALLOW] {packet_info['dst_ip']}:{packet_info['dst_port']} - {rule.get('description', 'No description')}")
                 return
                 
             elif action == 'block':
                 self.blocked_count += 1
+                self.log_event('block', packet_info, rule)
                 if not self.stealth:
-                    stealth_reason = " (AI EVASION)" if rule.get('category', '').startswith('ai_') else ""
-                    print(f"[✗] BLOCK: {packet_info['dst_ip']}:{packet_info['dst_port']} - {rule.get('description', 'No description')}{stealth_reason}")
+                    stealth_reason = " (EVASION)" if rule.get('category', '').startswith('ai_') else ""
+                    print(f"[BLOCK] {packet_info['dst_ip']}:{packet_info['dst_port']} - {rule.get('description', 'No description')}{stealth_reason}")
                 # Implement blocking logic here (iptables rules, etc.)
                 self.block_connection(packet_info)
                 return
@@ -325,13 +382,16 @@ class PentestNetFilter:
                 decision = self.prompt_user(packet_info, rule)
                 if decision == 'block':
                     self.block_connection(packet_info)
+                    self.log_event('block', packet_info, rule)
                     self.blocked_count += 1
                 else:
+                    self.log_event('allow', packet_info, rule)
                     self.allowed_count += 1
                 return
                 
         # Default action - log and allow
         self.allowed_count += 1
+        self.log_event('allow', packet_info)
         if not self.stealth:
             print(f"[?] DEFAULT ALLOW: {packet_info['dst_ip']}:{packet_info['dst_port']}")
             
@@ -455,17 +515,17 @@ class PentestNetFilter:
             # Basic MAC spoofing + AI confusion
             self.flea_flicker.change_mac_address()
             self.flea_flicker.start_ai_confusion()
-            print("   ✓ MAC spoofing activated")
-            print("   ✓ AI confusion tactics enabled")
+            print("   [+] MAC spoofing activated")
+            print("   [+] Evasion tactics enabled")
             
         elif mode == "advanced":
             # Advanced MAC rotation + honeypots
             self.flea_flicker.start_mac_rotation(interval=300)  # 5 minutes
             self.flea_flicker.deploy_ai_traps()
             self.flea_flicker.start_ai_confusion()
-            print("   ✓ MAC rotation every 5 minutes")
-            print("   ✓ AI trap honeypots deployed")
-            print("   ✓ Advanced confusion tactics enabled")
+            print("   [+] MAC rotation every 5 minutes")
+            print("   [+] Trap honeypots deployed")
+            print("   [+] Advanced evasion tactics enabled")
             
         elif mode == "maximum":
             # Full deception suite
@@ -474,10 +534,10 @@ class PentestNetFilter:
             self.flea_flicker.start_web3_attacks()
             self.flea_flicker.start_mitm_feints()
             self.flea_flicker.start_ai_confusion()
-            print("   ✓ Rapid MAC rotation every 2 minutes")
-            print("   ✓ AI trap honeypots with Web3 attacks")
-            print("   ✓ MitM feint operations")
-            print("   ✓ Maximum confusion protocols")
+            print("   [+] Rapid MAC rotation every 2 minutes")
+            print("   [+] Trap honeypots with Web3 attacks active")
+            print("   [+] MitM feint operations active")
+            print("   [+] Maximum evasion protocols active")
             
         elif mode == "chaos":
             # Maximum experimental chaos
@@ -488,12 +548,12 @@ class PentestNetFilter:
             self.flea_flicker.start_protocol_confusion()
             self.flea_flicker.start_emotional_ai_confusion()
             self.flea_flicker.start_ai_confusion()
-            print("   ⚠️  CHAOS MODE: All experimental features active")
-            print("   ✓ Continuous MAC noise + rapid rotation")
-            print("   ✓ Full AI deception suite")
-            print("   ✓ Web3 attack simulation")
-            print("   ✓ Protocol confusion active")
-            print("   ✓ Emotional AI manipulation")
+            print("   [!] CHAOS MODE: All experimental features active")
+            print("   [+] Continuous MAC noise + rapid rotation")
+            print("   [+] Full deception suite active")
+            print("   [+] Web3 attack simulation active")
+            print("   [+] Protocol confusion active")
+            print("   [+] Heuristic manipulation active")
 
 def main():
     parser = argparse.ArgumentParser(description='Flea Flicker NetFilter - Experimental Network Filter for Pentesting')
@@ -503,7 +563,7 @@ def main():
     parser.add_argument('--stealth-mode', choices=['basic', 'advanced', 'maximum'], 
                        default='basic', help='Stealth mode level (default: basic)')
     parser.add_argument('--ai-evasion', action='store_true', 
-                       help='Enable AI detection evasion (implies stealth)')
+                       help='Enable detection evasion (implies stealth)')
     parser.add_argument('--flea-flicker', choices=['basic', 'advanced', 'maximum', 'chaos'],
                        help='🏈 Enable experimental Flea Flicker evasion mode')
     parser.add_argument('--interactive', action='store_true', help='Interactive mode (prompt for unknown connections)')
@@ -520,7 +580,7 @@ def main():
     
     # Flea Flicker mode warnings
     if args.flea_flicker:
-        print("🏈 ⚠️  EXPERIMENTAL FLEA FLICKER MODE ACTIVATED ⚠️")
+        print("🏈 [!] EXPERIMENTAL FLEA FLICKER MODE ACTIVATED")
         print("   Using advanced evasion techniques for authorized testing only")
     
     # Check if running as root (skip for demo mode)
@@ -557,7 +617,7 @@ def main():
     
     # Demo mode
     if args.demo:
-        print("🧪 Demo Mode - Running safe simulation")
+        print("[*] Demo Mode - Running safe simulation")
         from demo import run_demo
         run_demo()
         return
@@ -565,12 +625,12 @@ def main():
     # Start monitoring
     try:
         if args.ai_evasion:
-            print("🛡️  AI Detection Evasion Mode Activated")
-            print("🤖 Blocking AI/ML services and security vendors")
+            print("[*] Detection Evasion Mode Activated")
+            print("[*] Blocking analysis services and security vendors")
             
         if args.flea_flicker:
             print(f"🏈 Flea Flicker {args.flea_flicker.upper()} Mode Active")
-            print("🎭 Experimental deception and misdirection protocols engaged")
+            print("[*] Experimental deception and misdirection protocols engaged")
         
         netfilter.start_monitoring()
     except KeyboardInterrupt:
