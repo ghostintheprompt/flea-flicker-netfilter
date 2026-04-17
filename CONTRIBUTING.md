@@ -1,6 +1,6 @@
-# Contributing to PentestNetFilter
+# Contributing to Flea Flicker NetFilter
 
-PentestNetFilter is an open-source project designed for security professionals and researchers. We welcome contributions that improve the tool's effectiveness, stealth, and professional utility.
+Flea Flicker NetFilter is an open-source project designed for security professionals and researchers. We welcome contributions that improve the tool's effectiveness, stealth, and professional utility.
 
 ## Project Objectives
 

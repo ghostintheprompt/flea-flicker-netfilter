@@ -1,7 +1,7 @@
 # Advanced Stealth & Evasion Reference
 
 ## Overview
-PentestNetFilter incorporates advanced detection evasion capabilities designed for security assessments where minimizing the operational footprint is critical. These features target behavioral analysis, heuristic detection, and automated telemetry collection.
+Flea Flicker NetFilter incorporates advanced detection evasion capabilities designed for security assessments where minimizing the operational footprint is critical. These features target behavioral analysis, heuristic detection, and automated telemetry collection.
 
 ## Command Reference
 
