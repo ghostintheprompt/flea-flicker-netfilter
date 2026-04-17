@@ -1,149 +1,90 @@
 # Contributing to PentestNetFilter
 
-Thank you for considering contributing to PentestNetFilter! This project aims to provide a lightweight, hackable network filter for penetration testing and security research.
+PentestNetFilter is an open-source project designed for security professionals and researchers. We welcome contributions that improve the tool's effectiveness, stealth, and professional utility.
 
-## 🎯 Project Goals
+## Project Objectives
 
-- **Lightweight**: Minimal resource usage, non-intrusive operation
-- **Pentest-friendly**: Designed for security professionals and researchers  
-- **Hackable**: Easy to modify and extend for specific use cases
-- **Educational**: Help users understand network behavior
+- **Operational Efficiency**: Minimal resource consumption and non-intrusive execution.
+- **Assessor Utility**: Features tailored for Red Team operations and specialized security assessments.
+- **Architectural Flexibility**: Modular design that allows for easy extension of evasion techniques and rule sets.
 
-## 🤝 How to Contribute
+## Contribution Workflow
 
-### Reporting Issues
-- Use GitHub Issues to report bugs or request features
-- Include your OS, Python version, and steps to reproduce
-- For security issues, please contact maintainers privately first
+### Issue Reporting
+- Utilize GitHub Issues for bug reports and feature requests.
+- Provide environment details (Distribution, Python version, Kernel version).
+- **Security Vulnerabilities**: For vulnerabilities affecting the tool itself, please contact the maintainers via private channels.
 
 ### Code Contributions
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Test thoroughly (especially with different OS configurations)
-5. Commit changes (`git commit -m 'Add amazing feature'`)
-6. Push to branch (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
+1. Fork the repository.
+2. Create a targeted feature branch (`git checkout -b feature/targeted-improvement`).
+3. Implement changes ensuring alignment with existing architectural patterns.
+4. Validate changes across multiple environment profiles.
+5. Submit a detailed Pull Request (PR) explaining the technical rationale.
 
 ### Documentation
-- Improve README, guides, or code comments
-- Add new rule configurations for specific use cases
-- Create tutorials or walkthroughs
+- Updates to operational guides and methodology documentation.
+- Development of specialized rule configurations for industry-standard tools.
 
-## 🛠️ Development Setup
+## Development Environment Setup
 
 ```bash
-# Clone your fork
-git clone https://github.com/yourusername/pentest-netfilter
-cd pentest-netfilter
+# Clone the repository
+git clone https://github.com/ghostintheprompt/flea-flicker-netfilter
+cd flea-flicker-netfilter
 
-# Install development dependencies
-pip3 install psutil scapy
+# Provision dependencies
+pip3 install psutil scapy requests
 
-# Test the application
+# Execute diagnostic tests
 python3 demo.py --demo
-sudo python3 netfilter.py --help
+python3 netfilter.py --help
 ```
 
-## 📝 Coding Guidelines
+## Engineering Standards
 
-### Python Style
-- Follow PEP 8 style guidelines
-- Use meaningful variable and function names
-- Add docstrings for functions and classes
-- Keep functions focused and modular
+### Python Implementation
+- Adherence to PEP 8 standards.
+- Mandatory type hinting for new function signatures.
+- Descriptive docstrings utilizing the Sphinx or Google style.
 
-### Rule Configurations
-- Use clear, descriptive rule descriptions
-- Categorize rules appropriately (essential, pentest, privacy, etc.)
-- Test rules thoroughly before submitting
+### Configuration Management
+- Rule sets must include descriptive labels.
+- JSON configurations should be validated for structural integrity.
 
-### Documentation
-- Update README.md for new features
-- Add examples for new functionality
-- Keep documentation clear and beginner-friendly
+## Testing & Validation
 
-## 🧪 Testing
-
-Before submitting changes:
+All submissions must pass basic validation:
 
 ```bash
-# Test basic functionality
-python3 demo.py --demo
+# Verify rule set parsing
+python3 -c "import json; rules=json.load(open('default_rules.json')); print(f'Validated {len(rules[\"rules\"])} rules')"
 
-# Test rule loading
-python3 -c "
-import json
-with open('default_rules.json') as f:
-    rules = json.load(f)
-    print(f'Loaded {len(rules[\"rules\"])} rules successfully')
-"
-
-# Test in VM (if available)
-sudo python3 netfilter.py --config example_rules.json --help
+# Verify operational stability in a lab environment
+./launch.sh demo
 ```
 
-## 🎨 Ideas for Contributions
+## Areas for Improvement
 
-### New Features
-- GUI interface using tkinter or web-based dashboard
-- Integration with other security tools
-- Advanced logging and reporting
-- Custom rule creation wizard
-- Performance optimizations
+- **Telemetry Analysis**: Development of rule sets targeting emerging EDR/XDR telemetry patterns.
+- **Protocol Masking**: Implementation of additional application-layer obfuscation (e.g., SMB over HTTP).
+- **Integration**: Enhancements for interaction with Metasploit, Cobalt Strike, or Sliver.
+- **Enterprise Reporting**: CEF/Syslog export enhancements for SIEM integration.
 
-### Rule Sets
-- CTF-specific rule configurations
-- Malware analysis rule sets  
-- Privacy-focused configurations
-- Enterprise pentest rule templates
+## Code of Conduct
 
-### Platform Support
-- Improved container support
-- Better VMware/VirtualBox integration
-- Cloud deployment guides
-- Raspberry Pi optimization
+- Maintain professional communication.
+- Focus on technical excellence and operational utility.
+- Respect the security research community's standards for responsible disclosure and collaboration.
 
-### Documentation
-- Video tutorials
-- Advanced use case guides
-- Integration with popular pentest frameworks
-- Troubleshooting guides
+## Operational Ethics
 
-## ⚖️ Code of Conduct
+This framework is developed strictly for:
+- Authorized security assessments.
+- Defensive research and blue team training.
+- Academic study of network behavior and evasion techniques.
 
-### Our Standards
-- Be respectful and inclusive
-- Focus on constructive feedback
-- Help others learn and grow
-- Maintain professional communication
-
-### Unacceptable Behavior
-- Harassment or discrimination
-- Sharing this tool for malicious purposes
-- Unauthorized testing on systems you don't own
-- Violating applicable laws or regulations
-
-## 🚨 Security and Responsible Use
-
-This tool is designed for:
-- ✅ Authorized penetration testing
-- ✅ Security research and education  
-- ✅ Privacy protection on your own systems
-- ✅ Learning network behavior
-
-NOT for:
-- ❌ Unauthorized access or testing
-- ❌ Malicious activities
-- ❌ Violating terms of service
-- ❌ Any illegal activities
-
-## 📞 Contact
-
-- GitHub Issues: For bugs and feature requests
-- Discussions: For questions and community interaction
-- Security Issues: Contact maintainers privately
+Unauthorized or malicious use of this framework is strictly prohibited and contrary to the project's mission.
 
 ---
-
-**Remember**: This project exists to improve security education and authorized testing. Please use responsibly! 🔥
+**Commitment**: We are committed to maintaining a high-quality, professional-grade toolkit for the security industry.
