@@ -1,51 +1,45 @@
-# PentestNetFilter Project Structure
+# Project Architecture & Structure
 
-This document shows the expected project structure after cloning/downloading.
+This document outlines the architectural components and directory layout of the Flea Flicker NetFilter framework.
 
-## 📁 Project Layout
+## Component Overview
 
-```
-pentest_netfilter/
-├── README.md                 # Project overview and quick start
-├── QUICKSTART.md            # Detailed setup guide  
-├── VM_DEPLOYMENT.md         # VMware shared folder guide
-├── Makefile                 # Build automation
-│
-├── netfilter.py            # Main application
-├── demo.py                 # Safe testing script
-│
-├── install.sh              # Linux installation script
-├── vmware_setup.sh         # VMware VM setup script
-│
-├── default_rules.json      # General pentest rules
-├── kali_rules.json         # Kali Linux optimized  
-├── redteam_rules.json      # Red team operations
-└── example_rules.json      # Advanced configuration
-```
+### Core Framework
+- **`netfilter.py`**: Principal application logic for packet interception, rule processing, and SIEM logging.
+- **`stealth_mode.py`**: Advanced module for behavioral obfuscation, traffic mimicry, and anti-forensics.
+- **`flea_flicker_evasion.py`**: Experimental module for identity rotation, heuristic manipulation, and protocol feints.
 
-## 🚀 Setup Paths
+### Configuration Profiles
+- **`default_rules.json`**: Baseline assessment ruleset.
+- **`kali_rules.json`**: Optimization for Kali Linux environments.
+- **`redteam_rules.json`**: Specialized ruleset for covert operations.
+- **`ai_stealth_rules.json`**: Baseline detection evasion profile.
+- **`advanced_stealth_rules.json`**: Comprehensive evasion profile for high-assurance engagements.
 
-### For VMware Shared Folder:
-1. **Host Path**: `/path/to/your/pentest_netfilter/`
-2. **VM Path**: `/mnt/hgfs/pentest_netfilter/`
-3. **Symlink**: `/opt/netfilter` (created by setup script)
+### Deployment & Tooling
+- **`Makefile`**: Automation for installation, capability management, and diagnostic execution.
+- **`install.sh`**: Provisioning script for Linux environments.
+- **`launch.sh`**: Centralized wrapper for framework execution across various operation modes.
+- **`vmware_setup.sh`**: Environment preparation for virtualized deployment.
+- **`demo.py`**: Non-intrusive diagnostic script for rule validation.
 
-### For Native Installation:
-1. **Clone to**: `~/tools/pentest_netfilter/`  
-2. **Or**: `/opt/pentest_netfilter/`
-3. **Scripts in**: `~/bin/` (for easy access)
+### Documentation
+- **`README.md`**: Framework overview and primary entry point.
+- **`QUICKSTART.md`**: Rapid deployment and usage guide.
+- **`STEALTH_GUIDE.md`**: Technical reference for evasion capabilities.
+- **`FLEA_FLICKER_GUIDE.md`**: Manual for experimental evasion features.
+- **`VM_DEPLOYMENT.md`**: Guidelines for virtualized environment integration.
+- **`EVASION_METHODOLOGY.md`**: Technical analysis of evasion "physics" and IDS bypass logic.
 
-## 📝 Notes
+## Standardized Paths
 
-- All file paths in documentation use generic placeholders
-- Replace `/path/to/pentest_netfilter/` with your actual path
-- Replace `username` in GitHub URLs with your actual username
-- VMware paths may vary by system (`/mnt/hgfs/` vs `/mnt/shared/`)
+### Virtualized Deployment (VMware)
+- **Host System Path**: User-defined local directory.
+- **Guest System Mount**: `/mnt/hgfs/pentest_netfilter/`
+- **Standardized Alias**: `/opt/netfilter` (established via symbolic link).
 
-## 🔧 Customization
+### Native Deployment
+- **Recommended Location**: `/opt/flea-flicker-netfilter/` or `~/tools/flea-flicker-netfilter/`.
 
-Feel free to modify:
-- Rule configurations for your specific use cases
-- File paths and directory structure  
-- GitHub repository URL in documentation
-- Author information in headers
+## Operational Integrity
+All framework components are designed to be modular. Configuration profiles can be extended or replaced without modification to the core application logic, facilitating rapid adaptation to emerging defensive technologies.

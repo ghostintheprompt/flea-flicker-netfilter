@@ -1,6 +1,6 @@
 {
   "name": "Flea Flicker Basic Configuration",
-  "description": "Basic experimental evasion with MAC spoofing and AI confusion",
+  "description": "Standard evasion profile with MAC spoofing and detection blending",
   "version": "3.0",
   "rules": [
     {
@@ -36,51 +36,51 @@
     {
       "action": "block",
       "domain": "api.openai.com",
-      "description": "🤖 Block OpenAI API"
+      "description": "Block OpenAI API"
     },
     {
       "action": "block",
       "domain": "copilot.microsoft.com",
-      "description": "🤖 Block Microsoft Copilot"
+      "description": "Block Microsoft Copilot"
     },
     {
       "action": "block",
       "domain": "claude.ai",
-      "description": "🤖 Block Claude AI"
+      "description": "Block Claude AI"
     },
     {
       "action": "block",
       "domain": "bard.google.com",
-      "description": "🤖 Block Google Bard"
+      "description": "Block Google Bard"
     },
     {
       "action": "block",
       "domain": "telemetry.microsoft.com",
-      "description": "🛡️ Block Microsoft telemetry"
+      "description": "Block Microsoft telemetry"
     },
     {
       "action": "block",
       "domain": "vortex.data.microsoft.com",
-      "description": "🛡️ Block Microsoft Vortex"
+      "description": "Block Microsoft Vortex"
     },
     {
       "action": "block",
       "domain": "analytics.google.com",
-      "description": "🛡️ Block Google Analytics"
+      "description": "Block Google Analytics"
     },
     {
       "action": "allow",
       "port": 8080,
-      "description": "🏈 Allow proxy traffic for evasion"
+      "description": "Allow proxy traffic"
     },
     {
       "action": "allow",
       "port": 9050,
-      "description": "🏈 Allow Tor SOCKS proxy"
+      "description": "Allow Tor SOCKS proxy"
     },
     {
       "action": "prompt",
-      "description": "🏈 Prompt for unknown connections in basic mode"
+      "description": "Prompt for unknown connections"
     }
   ],
   "flea_flicker": {
