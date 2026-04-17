@@ -1,0 +1,27 @@
+{
+  "name": "Protocol Downgrade Attack Simulation",
+  "description": "Forces fallback from TLS 1.3 to vulnerable versions by identifying secure protocol negotiations",
+  "version": "1.0",
+  "rules": [
+    {
+      "action": "downgrade",
+      "target_protocol": "TLS 1.3",
+      "fallback_protocol": "TLS 1.2",
+      "description": "Force fallback from TLS 1.3 to TLS 1.2",
+      "techniques": [
+        "Drop TLS 1.3 ClientHello extensions",
+        "Modify supported_versions extension"
+      ]
+    },
+    {
+      "action": "downgrade",
+      "target_protocol": "TLS 1.2",
+      "fallback_protocol": "TLS 1.0",
+      "description": "Force fallback from TLS 1.2 to TLS 1.0",
+      "techniques": [
+        "Intercept and modify ClientHello cipher suites",
+        "Simulate connection resets on TLS 1.2 attempts"
+      ]
+    }
+  ]
+}

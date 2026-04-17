@@ -160,6 +160,18 @@
     "mitm_feints": true,
     "protocol_confusion": true,
     "emotional_ai_confusion": true,
-    "chaos_mode": true
+    "chaos_mode": true,
+    "beacon_jitter_simulation": {
+      "enabled": true,
+      "base_interval_ms": 5000,
+      "jitter_percent": 35,
+      "simulate_c2_heartbeats": true
+    },
+    "latency_injection": {
+      "enabled": true,
+      "min_latency_ms": 50,
+      "max_latency_ms": 800,
+      "target_protocols": ["HTTP", "HTTPS", "DNS"]
+    }
   }
 }

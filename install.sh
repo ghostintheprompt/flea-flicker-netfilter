@@ -28,7 +28,7 @@ else
 fi
 
 # Check for required commands
-commands=("python3" "pip3" "iptables")
+commands=("python3" "pip3" "iptables" "setcap")
 missing_commands=()
 
 for cmd in "${commands[@]}"; do
@@ -40,7 +40,7 @@ done
 if [ ${#missing_commands[@]} -ne 0 ]; then
     echo "[!] Missing required commands: ${missing_commands[*]}"
     echo "    Please install them first:"
-    echo "    sudo apt update && sudo apt install python3 python3-pip iptables"
+    echo "    sudo apt update && sudo apt install python3 python3-pip iptables libcap2-bin"
     exit 1
 fi
 
@@ -59,6 +59,12 @@ python3 -c "import psutil, scapy" 2>/dev/null || {
 }
 
 echo "[+] Python dependencies installed successfully"
+
+# Setup Least-Privilege Deployment using setcap
+echo "[+] Setting up least-privilege deployment (granting CAP_NET_ADMIN)..."
+PYTHON_BIN=$(readlink -f $(which python3))
+sudo setcap cap_net_admin,cap_net_raw+eip "$PYTHON_BIN"
+echo "[+] Capabilities granted to $PYTHON_BIN"
 
 # Make the script executable
 chmod +x netfilter.py
@@ -129,17 +135,17 @@ read -p "Choice [1-3]: " choice
 
 case $choice in
     1)
-        sudo python3 netfilter.py --interactive
+        python3 netfilter.py --interactive
         ;;
     2)
-        sudo python3 netfilter.py --config example_rules.json
+        python3 netfilter.py --config example_rules.json
         ;;
     3)
-        sudo python3 netfilter.py --stealth
+        python3 netfilter.py --stealth
         ;;
     *)
         echo "Invalid choice. Starting in interactive mode..."
-        sudo python3 netfilter.py --interactive
+        python3 netfilter.py --interactive
         ;;
 esac
 EOF
@@ -219,17 +225,17 @@ echo "========================"
 echo ""
 echo "Quick Start:"
 echo "  ./start_filter.sh                    # Interactive start menu"
-echo "  sudo python3 netfilter.py --help    # Show all options"
+echo "  python3 netfilter.py --help          # Show all options"
 echo ""
 echo "Example Usage:"
-echo "  sudo python3 netfilter.py --interactive           # Interactive mode"
-echo "  sudo python3 netfilter.py --config ctf_rules.json # CTF mode"
-echo "  sudo python3 netfilter.py --stealth               # Stealth mode"
+echo "  python3 netfilter.py --interactive           # Interactive mode"
+echo "  python3 netfilter.py --config ctf_rules.json # CTF mode"
+echo "  python3 netfilter.py --stealth               # Stealth mode"
 echo ""
 echo "Configuration Files:"
 echo "  example_rules.json  # Basic configuration"
 echo "  ctf_rules.json      # CTF-optimized rules"
 echo ""
-echo "Note: Always run the filter with sudo for packet capture and iptables access"
+echo "Note: The filter no longer requires sudo thanks to least-privilege deployment (setcap)"
 echo ""
 echo "Happy hacking! 🔥"

@@ -1,197 +1,138 @@
-# Advanced Stealth Features - Quick Reference
+# Advanced Stealth & Evasion Reference
 
-## 🥷 Stealth Mode Overview
+## Overview
+PentestNetFilter incorporates advanced detection evasion capabilities designed for security assessments where minimizing the operational footprint is critical. These features target behavioral analysis, heuristic detection, and automated telemetry collection.
 
-PentestNetFilter now includes sophisticated AI detection evasion capabilities designed for high-stakes operations where remaining undetected is critical.
+## Command Reference
 
-## 🚀 Quick Start Commands
-
-### Basic Usage
+### Standard Execution
 ```bash
-# Safe testing (no root required)
+# Diagnostic execution (no root required)
 ./launch.sh demo
 
-# Basic network filtering
+# Standard network filtering
 ./launch.sh basic
 
-# Enable stealth mode
+# Basic stealth mode
 ./launch.sh stealth
 ```
 
-### AI Detection Evasion
+### Detection Evasion
 ```bash
-# Block AI services and security vendors
+# Target analysis services and security vendors
 ./launch.sh ai-evasion
 
-# Maximum stealth with all features
+# Full feature stealth mode
 ./launch.sh maximum-stealth
 
-# Ultimate stealth mode (blocks ALL AI/telemetry)
+# Ultimate evasion (blocks all identified analysis/telemetry endpoints)
 ./launch.sh ghost
 ```
 
-### Advanced Operations
+### Specialized Operations
 ```bash
-# Red team + AI evasion + Tor routing
+# Red Team ruleset with Tor routing
 ./launch.sh shadow
 
-# Maximum stealth + traffic mimicry
+# Maximum stealth with background traffic mimicry
 ./launch.sh phantom
 
-# Kali Linux optimized rules
+# Kali Linux optimized configuration
 ./launch.sh kali
 
-# Red team operations
+# General Red Team operations ruleset
 ./launch.sh redteam
 ```
 
-## 🛡️ Stealth Features
+## Evasion Capabilities
 
-### 1. AI Detection Evasion
-- **Blocks**: OpenAI, Microsoft Copilot, Google AI, Anthropic Claude
-- **Security Vendors**: CrowdStrike, SentinelOne, Symantec, McAfee, etc.
-- **Analytics**: Google Analytics, Facebook tracking, Microsoft telemetry
-- **Threat Intelligence**: VirusTotal, Hybrid Analysis, abuse.ch
+### 1. Analysis Endpoint Blocking
+- **Identified Services**: OpenAI, Microsoft Copilot, Google AI, Anthropic Claude.
+- **Security Infrastructure**: CrowdStrike, SentinelOne, Symantec, McAfee.
+- **Telemetry & Analytics**: Google Analytics, Microsoft telemetry, Facebook tracking.
+- **Threat Intelligence**: VirusTotal, Hybrid Analysis, abuse.ch.
 
 ### 2. Traffic Mimicry
-- **Office Worker Pattern**: Regular business hours activity
-- **Developer Pattern**: GitHub, Stack Overflow, package repositories
-- **Researcher Pattern**: Academic sites, arXiv, research databases
+- **Business Profile**: Simulates activity consistent with standard business hours.
+- **Development Profile**: Mimics interactions with GitHub, Stack Overflow, and package repositories.
+- **Research Profile**: Simulates interaction with academic and technical research databases.
 
-### 3. Timing Obfuscation
-- **Human-like delays**: Random intervals between requests
-- **Rate limiting**: Prevents automated detection patterns
-- **Time restrictions**: Business hours only for certain activities
+### 3. Timing & Heuristics
+- **Jitter & Delays**: Implements non-deterministic intervals between requests to defeat time-series analysis.
+- **Rate Limiting**: Constrains connection frequency to avoid threshold-based alerting.
+- **Temporal Windows**: Restricts specific activities to predefined time windows (e.g., business hours).
 
-### 4. Protocol Enhancements
-- **DNS over HTTPS**: Encrypted DNS queries
-- **TLS fingerprint masking**: Avoid detection by TLS signatures
-- **User agent rotation**: Realistic browser identification
-- **Tor routing**: Optional routing through Tor network
+### 4. Protocol & Fingerprint Obfuscation
+- **Encrypted DNS**: Implementation of DNS over HTTPS.
+- **TLS Fingerprinting**: Obfuscation of TLS ClientHello parameters.
+- **User-Agent Management**: Dynamic rotation of realistic browser identities.
+- **Proxy Routing**: Optional integration with the Tor network for origin masking.
 
-## 📋 Configuration Files
+## Rule Configurations
 
-| File | Purpose | Use Case |
+| Profile | Purpose | Application |
 |------|---------|----------|
-| `default_rules.json` | General pentest-friendly rules | Basic operations |
-| `kali_rules.json` | Kali Linux optimized | Kali VM operations |
-| `redteam_rules.json` | Red team operations | Advanced pentesting |
-| `ai_stealth_rules.json` | Basic AI evasion | Standard stealth mode |
-| `advanced_stealth_rules.json` | Maximum AI evasion | High-stakes operations |
+| `default_rules.json` | General assessment rules | Standard engagements |
+| `kali_rules.json` | Kali Linux distribution optimization | Virtualized environments |
+| `redteam_rules.json` | Advanced assessment rules | Covert operations |
+| `ai_stealth_rules.json` | Standard evasion set | General stealth |
+| `advanced_stealth_rules.json` | Comprehensive evasion set | High-assurance operations |
 
-## 🎯 Operation Modes
+## Operation Mode Details
 
-### Ghost Mode (`./launch.sh ghost`)
-- **Purpose**: Ultimate stealth for sensitive operations
-- **Features**: Blocks ALL AI services, maximum evasion
-- **Use Case**: High-stakes red team engagements
+### Ghost Mode
+- **Objective**: Maximum isolation from analysis environments.
+- **Primary Feature**: Comprehensive blocking of identified analysis and telemetry endpoints.
+- **Scenario**: Sensitive data handling or extreme stealth requirements.
 
-### Shadow Mode (`./launch.sh shadow`)
-- **Purpose**: Red team operations with AI evasion
-- **Features**: Red team rules + AI blocking + Tor routing
-- **Use Case**: Advanced persistent threat simulation
+### Shadow Mode
+- **Objective**: Advanced assessment with origin masking.
+- **Primary Feature**: Red Team ruleset combined with Tor routing.
+- **Scenario**: External perimeter testing or APT simulation.
 
-### Phantom Mode (`./launch.sh phantom`)
-- **Purpose**: Stealth with traffic camouflage
-- **Features**: Maximum stealth + background traffic mimicry
-- **Use Case**: Long-term covert operations
+### Phantom Mode
+- **Objective**: Behavioral blending.
+- **Primary Feature**: Evasion set combined with active traffic mimicry.
+- **Scenario**: Long-term internal presence and lateral movement.
 
-## 🔧 Advanced Configuration
+## Advanced Configuration
 
-### Custom Stealth Rules
-Create custom rules in JSON format:
+### Custom Evasion Rules
 ```json
 {
   "action": "block",
-  "destination": "*.example-ai-service.com",
-  "description": "Block custom AI service",
-  "category": "ai_evasion"
+  "destination": "*.target-service.com",
+  "description": "Block specific telemetry endpoint",
+  "category": "evasion"
 }
 ```
 
-### Time-based Restrictions
+### Temporal Logic
 ```json
 {
   "action": "allow",
   "port": 22,
   "time_restriction": "business_hours_only",
-  "description": "SSH during business hours only"
+  "description": "Restrict SSH to business hours"
 }
 ```
 
-### Rate Limiting
-```json
-{
-  "action": "allow",
-  "process": "python",
-  "rate_limit": "5_requests_per_minute",
-  "description": "Rate-limited Python execution"
-}
-```
+## Operational Considerations
 
-## ⚠️ Important Warnings
+1. **Service Disruption**: Blocking analysis services may impact the functionality of specific local applications.
+2. **Resource Consumption**: Active traffic mimicry utilizes additional CPU and network bandwidth.
+3. **Pattern Detection**: While individual packets are obfuscated, overall network volume may be noted by advanced NDR (Network Detection and Response) systems.
 
-1. **AI Evasion Impact**: Blocking AI services may affect legitimate applications
-2. **Performance**: Traffic mimicry uses additional bandwidth
-3. **Detection Risk**: Unusual network patterns may trigger investigation
-4. **Legal**: Ensure compliance with applicable laws and regulations
-
-## 🛠️ Troubleshooting
-
-### Stealth Mode Not Working
+## Emergency Flush
+To immediately terminate all filtering and restore original network state:
 ```bash
-# Check if stealth_mode.py exists
-ls -la stealth_mode.py
-
-# Verify Python dependencies
-python3 -c "import psutil, scapy, requests"
-
-# Run in demo mode for testing
-./launch.sh demo
-```
-
-### High Resource Usage
-```bash
-# Disable traffic mimicry
-# Edit advanced_stealth_rules.json:
-# "fake_legitimate_traffic": false
-
-# Reduce timing obfuscation
-# "enable_timing_obfuscation": false
-```
-
-### Tor Integration Issues
-```bash
-# Install Tor
-sudo apt install tor
-
-# Start Tor service
-sudo systemctl start tor
-
-# Verify Tor is running
-curl --socks5-hostname 127.0.0.1:9050 http://check.torproject.org/api/ip
-```
-
-## 📚 Further Reading
-
-- `README.md` - Project overview and basic setup
-- `QUICKSTART.md` - Detailed installation guide
-- `VM_DEPLOYMENT.md` - VMware deployment instructions
-- `PROJECT_STRUCTURE.md` - Code organization
-- `CONTRIBUTING.md` - Development guidelines
-
-## 🚨 Emergency Stop
-
-To immediately disable all filtering:
-```bash
-# Kill the process
+# Terminate the process
 sudo pkill -f netfilter.py
 
-# Reset iptables (if needed)
+# Flush active rules
 sudo iptables -F
 sudo iptables -X
 ```
 
 ---
-
-**Remember**: Use these features responsibly and in compliance with all applicable laws and regulations. The advanced stealth capabilities are designed for legitimate security testing and research purposes only.
+**Security Notice**: These capabilities are intended for authorized security research and professional assessments only.
