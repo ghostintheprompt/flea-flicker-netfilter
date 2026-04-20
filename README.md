@@ -1,5 +1,9 @@
 # Flea Flicker NetFilter
 
+<div align="center">
+  <img src="flea_flicker.png" width="256" height="256" alt="Flea Flicker Icon" />
+</div>
+
 IDS blocks your scans. ML detects your payloads. Behavioral analysis flags your timing.
 
 **Flea Flicker manipulates network traffic before detection systems see it.**
