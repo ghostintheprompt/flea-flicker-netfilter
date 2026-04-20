@@ -1,4 +1,6 @@
-<img src="flea_flicker.png" width="200">
+<p align="center">
+  <img src="flea_flicker.png" width="520">
+</p>
 
 # Flea Flicker NetFilter
 Python-based network filter with packet manipulation, MAC spoofing, and IDS evasion capabilities. — v1.0
