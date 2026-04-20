@@ -1,14 +1,11 @@
-# Flea Flicker NetFilter
+<img src="flea_flicker.png" width="200">
 
-<div align="center">
-  <img src="flea_flicker.png" width="256" height="256" alt="Flea Flicker Icon" />
-</div>
+# Flea Flicker NetFilter
+Python-based network filter with packet manipulation, MAC spoofing, and IDS evasion capabilities. — v1.0
 
 IDS blocks your scans. ML detects your payloads. Behavioral analysis flags your timing.
 
 **Flea Flicker manipulates network traffic before detection systems see it.**
-
-Python-based network filter with packet manipulation, MAC spoofing, and IDS evasion capabilities.
 
 ---
 
