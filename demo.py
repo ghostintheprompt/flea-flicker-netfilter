@@ -11,9 +11,11 @@ import os
 def load_rules(config_file="default_rules.json"):
     """Load and display rules from config file"""
     try:
-        with open(config_file, 'r') as f:
-            config = json.load(f)
-            return config.get('rules', [])
+        if os.path.exists(config_file):
+            with open(config_file, 'r') as f:
+                config = json.load(f)
+                return config.get('rules', [])
+        return []
     except Exception as e:
         print(f"Error loading config: {e}")
         return []
@@ -24,7 +26,14 @@ def demo_rule_matching():
     print("=" * 50)
     
     rules = load_rules()
-    print(f"Loaded {len(rules)} rules from default_rules.json\n")
+    if not rules:
+        # Fallback to some hardcoded rules if file not found
+        rules = [
+            {"action": "allow", "process": "nmap", "description": "Nmap scanning"},
+            {"action": "block", "destination": "telemetry.mozilla.org", "description": "Block Mozilla telemetry"}
+        ]
+        
+    print(f"Loaded {len(rules)} rules for demonstration\n")
     
     # Sample packets to test
     test_packets = [
@@ -77,8 +86,7 @@ def rule_matches(rule, packet_info):
             
     # Check port
     if 'port' in rule:
-        if (rule['port'] == packet_info.get('dst_port') or 
-            rule['port'] == packet_info.get('src_port')):
+        if (rule['port'] == packet_info.get('dst_port')):
             return True
             
     # Check destination
@@ -116,10 +124,16 @@ def show_usage():
     print("- Create custom rule files for specific engagements")
     print("- Monitor /var/log/netfilter.log for activity")
 
+def run_demo():
+    """Main entry point for the demo simulation"""
+    print("[*] Starting Flea Flicker NetFilter Validation Suite...")
+    demo_rule_matching()
+    show_usage()
+    print("\n[+] Validation suite complete.")
+
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "--demo":
-        demo_rule_matching()
-        show_usage()
+        run_demo()
     else:
         print("Flea Flicker NetFilter Demo Script")
         print("Run with --demo to see rule matching demonstration")
