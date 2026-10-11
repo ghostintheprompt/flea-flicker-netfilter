@@ -61,8 +61,19 @@ class PentestNetFilter:
         # Initialize stealth mode if available and requested
         self.stealth_mode = None
         if STEALTH_AVAILABLE and (stealth or stealth_level != "basic"):
-            self.stealth_mode = StealthMode(stealth_level)
-            print(f"[*] Stealth mode initialized: {stealth_level}")
+            # Fixed 2026-10-11: this used to pass stealth_level itself
+            # ("basic"/"advanced"/"maximum") as the config_file argument
+            # to StealthMode(), which is never a real path. StealthMode
+            # ._load_config() would hit FileNotFoundError on every call
+            # and silently fall back to _default_config(), which has no
+            # "rules" key at all, so get_stealth_rules() always returned
+            # an empty list. _get_stealth_config_file() below already
+            # existed to map stealth_level to the right rules file
+            # (ai_stealth_rules.json / advanced_stealth_rules.json) but
+            # was never actually called anywhere in the class.
+            stealth_config_file = self._get_stealth_config_file()
+            self.stealth_mode = StealthMode(stealth_config_file)
+            print(f"[*] Stealth mode initialized: {stealth_level} ({stealth_config_file})")
             
         # Initialize Flea Flicker evasion if available and requested
         self.flea_flicker = None
